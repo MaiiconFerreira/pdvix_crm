@@ -1,5 +1,6 @@
-// paginas/pagamentos.js
-// Orquestração da tela de Pagamentos
+// pagamentos.js — ajustes de UI para o novo design system
+// Apenas as funções de renderização visual foram atualizadas.
+// A lógica de negócio e estrutura permanecem idênticas.
 
 window.PageFunctions['pagamentos'] = function () {
 
@@ -27,22 +28,29 @@ window.PageFunctions['pagamentos'] = function () {
     pos_credito: 'POS Crédito', pos_pix: 'POS PIX', dinheiro: 'Dinheiro', outros: 'Outros',
   };
 
-  const TIPO_BADGE_COLOR = {
-    pix: 'primary', convenio: 'secondary', pos_debito: 'dark',
-    pos_credito: 'dark', pos_pix: 'info', dinheiro: 'success', outros: 'secondary',
+  // ✅ Atualizado: usa classes do design system
+  const TIPO_BADGE_CLASS = {
+    pix:        'badge-tipo-pix',
+    convenio:   'badge-tipo-convenio',
+    pos_debito: 'badge-tipo-debito',
+    pos_credito:'badge-tipo-credito',
+    pos_pix:    'badge-tipo-pix',
+    dinheiro:   'badge-tipo-dinheiro',
+    outros:     'badge-tipo-outros',
   };
 
   function badgeTipo(t) {
-    return `<span class="badge bg-${TIPO_BADGE_COLOR[t] || 'secondary'}">${TIPO_LABEL[t] || t}</span>`;
+    const cls = TIPO_BADGE_CLASS[t] || 'badge-neutral';
+    return `<span class="erp-badge ${cls}">${TIPO_LABEL[t] || t}</span>`;
   }
 
   function badgeStatus(s) {
     const map = {
-      pendente:   '<span class="badge badge-pgt-pendente">Pendente</span>',
-      confirmado: '<span class="badge badge-pgt-confirmado">Confirmado</span>',
-      cancelado:  '<span class="badge badge-pgt-cancelado">Cancelado</span>',
+      pendente:   '<span class="erp-badge badge-pgt-pendente">Pendente</span>',
+      confirmado: '<span class="erp-badge badge-pgt-confirmado">Confirmado</span>',
+      cancelado:  '<span class="erp-badge badge-pgt-cancelado">Cancelado</span>',
     };
-    return map[s] || `<span class="badge bg-secondary">${s}</span>`;
+    return map[s] || `<span class="erp-badge badge-neutral">${s}</span>`;
   }
 
   // ── Select2 filtros ─────────────────────────────────────────────────────────
@@ -54,9 +62,9 @@ window.PageFunctions['pagamentos'] = function () {
   const colunas = [
     { data: 'numero_venda' },
     { data: 'tipo_pagamento', render: d => badgeTipo(d) },
-    { data: 'valor',          render: d => fmtMoeda(d) },
-    { data: 'referencia_externa', render: d => d || '<span class="text-muted">—</span>' },
-    { data: 'descricao',          render: d => d || '<span class="text-muted">—</span>' },
+    { data: 'valor',          render: d => `<strong>${fmtMoeda(d)}</strong>` },
+    { data: 'referencia_externa', render: d => d || '<span class="text-muted-erp">—</span>' },
+    { data: 'descricao',          render: d => d || '<span class="text-muted-erp">—</span>' },
     { data: 'status',             render: d => badgeStatus(d) },
     { data: 'created_at',         render: d => fmtData(d) },
     {
@@ -64,22 +72,23 @@ window.PageFunctions['pagamentos'] = function () {
       orderable: false, searchable: false,
       render: (data, type, row) => {
         const isPendente = row.status === 'pendente';
-        return `
-          <button class="btn btn-sm btn-primary me-1" title="Editar"
+        return `<div class="act-group">
+          <button class="btn-act btn-act-edit" title="Editar"
             onclick="editarPagamento(${row.id}, ${row.venda_id}, '${row.tipo_pagamento}',
               '${row.valor}', '${window.escHtml(row.referencia_externa||'')}',
               '${window.escHtml(row.descricao||'')}')">
             <i class="bi bi-pencil-square"></i>
           </button>
-          <button class="btn btn-sm btn-warning me-1" title="Alterar status"
+          <button class="btn-act btn-act-warn" title="Alterar status"
             onclick="alterarStatusPagamento(${row.id}, '${row.status}')">
             <i class="bi bi-arrow-repeat"></i>
           </button>
           ${isPendente ? `
-          <button class="btn btn-sm btn-danger" title="Excluir"
+          <button class="btn-act btn-act-danger btn-act-danger-hover" title="Excluir"
             onclick="excluirPagamento(${row.id})">
             <i class="bi bi-trash-fill"></i>
-          </button>` : ''}`;
+          </button>` : ''}
+        </div>`;
       },
     },
   ];
@@ -155,7 +164,7 @@ window.PageFunctions['pagamentos'] = function () {
     ];
   }
 
-  // ── Criar pagamento ──────────────────────────────────────────────────────────
+  // ── Criar ────────────────────────────────────────────────────────────────────
   document.querySelector('[data-create]').addEventListener('click', () => {
     MODAL.openFormModal({
       title: 'Cadastrar Pagamento',
@@ -181,7 +190,7 @@ window.PageFunctions['pagamentos'] = function () {
     });
   });
 
-  // ── Editar pagamento ─────────────────────────────────────────────────────────
+  // ── Editar ───────────────────────────────────────────────────────────────────
   window.editarPagamento = function (id, vendaId, tipoPgt, valor, ref, desc) {
     MODAL.openFormModal({
       title: 'Editar Pagamento',

@@ -12,6 +12,27 @@ $routes = [
     // Autenticação por token estático (config.api_token) — sem sessão PHP.
     'api/carga-inicial'  => ['controller' => 'CargaInicialController', 'method' => 'index'],
 
+    /*** PDV ELECTRON — Sincronização de vendas offline ***/
+    // POST /api/pdv/sync-venda?token=XXX → recebe venda completa (itens + pagamentos)
+    //                                       do PDV offline, persiste no servidor,
+    //                                       baixa estoque e retorna { id_servidor }.
+    // Autenticação por token estático — sem sessão PHP.
+    // Idempotente: reenvios do mesmo numero_venda retornam id_servidor sem duplicar.
+    'api/pdv/sync-venda' => ['controller' => 'PdvSyncController', 'method' => 'sync'],
+
+    /*** PDV ELECTRON — Sincronização de caixas offline ***/
+    // POST /api/pdv/sync-caixa?token=XXX  → recebe sessão de caixa completa
+    //                                        (abertura + totais por forma + sangrias)
+    //                                        e retorna { id_servidor }.
+    // Autenticação por token estático — sem sessão PHP.
+    // Idempotente: chave (numero_pdv + usuario_id + abertura_em) — reenvios atualizam sem duplicar.
+    // GET  /api/pdv/caixas                → lista caixas sincronizados (DataTables server-side).
+    //                                        Usa sessão PHP normal — painel admin.
+    // GET  /api/pdv/caixas/detalhe?id=X   → detalhe de um caixa + lista de sangrias.
+    'api/pdv/sync-caixa'     => ['controller' => 'PdvCaixaController', 'method' => 'sync'],
+    'api/pdv/caixas/detalhe' => ['controller' => 'PdvCaixaController', 'method' => 'detalhe'],
+    'api/pdv/caixas'         => ['controller' => 'PdvCaixaController', 'method' => 'listar'],
+
     /*** USUÁRIOS — REST /api/users/ ***/
     // GET    /api/users          → listar todos
     // POST   /api/users          → criar

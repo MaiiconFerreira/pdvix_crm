@@ -1,0 +1,594 @@
+/* ═══════════════════════════════════════════════════════════════
+   ERP DESIGN SYSTEM — PDV + CRM
+   Paleta: Azul piscina · Azul escuro · Preto suave · Roxo escuro
+   Inspiração: Asaas, Linear, sistemas SaaS modernos
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Tokens ───────────────────────────────────────────────────── */
+:root {
+  /* Cores primárias */
+  --c-primary:       #0ea5e9;   /* azul piscina */
+  --c-primary-dark:  #0284c7;
+  --c-primary-light: #e0f2fe;
+  --c-primary-50:    #f0f9ff;
+
+  /* Azul escuro (menus/headers) */
+  --c-navy:          #0f172a;
+  --c-navy-2:        #1e293b;
+  --c-navy-3:        #334155;
+
+  /* Roxo escuro suave (destaques) */
+  --c-purple:        #6d28d9;
+  --c-purple-light:  #ede9fe;
+
+  /* Neutros */
+  --c-bg:            #f8fafc;
+  --c-surface:       #ffffff;
+  --c-border:        #e2e8f0;
+  --c-border-light:  #f1f5f9;
+
+  /* Texto */
+  --c-text-1:        #0f172a;
+  --c-text-2:        #475569;
+  --c-text-3:        #94a3b8;
+
+  /* Semânticos */
+  --c-success:       #059669;
+  --c-success-bg:    #ecfdf5;
+  --c-warning:       #d97706;
+  --c-warning-bg:    #fffbeb;
+  --c-danger:        #dc2626;
+  --c-danger-bg:     #fef2f2;
+  --c-info:          #0ea5e9;
+  --c-info-bg:       #f0f9ff;
+
+  /* Espaçamentos */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  32px;
+  --space-2xl: 48px;
+
+  /* Raios */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+  --radius-pill: 999px;
+
+  /* Sombras */
+  --shadow-xs: 0 1px 2px rgba(15,23,42,.04);
+  --shadow-sm: 0 1px 4px rgba(15,23,42,.07), 0 1px 2px rgba(15,23,42,.04);
+  --shadow-md: 0 4px 12px rgba(15,23,42,.08), 0 2px 4px rgba(15,23,42,.04);
+  --shadow-lg: 0 12px 28px rgba(15,23,42,.10), 0 4px 8px rgba(15,23,42,.06);
+
+  /* Transições */
+  --t-fast:   150ms ease;
+  --t-normal: 220ms ease;
+}
+
+/* ── Reset & Base ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', 'Nunito', system-ui, sans-serif;
+  background: var(--c-bg);
+  color: var(--c-text-1);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ── Page wrapper (módulo injetado pelo core.js) ─────────────── */
+.erp-page {
+  padding: var(--space-lg);
+  max-width: 1600px;
+}
+
+/* ── Page Header ─────────────────────────────────────────────── */
+.erp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.erp-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.erp-page-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--c-navy);
+  margin: 0;
+  letter-spacing: -0.3px;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.erp-page-title i {
+  color: var(--c-primary);
+  font-size: 1.2rem;
+}
+
+.erp-header-actions {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ── Cards resumo ─────────────────────────────────────────────── */
+.erp-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.erp-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--t-normal), transform var(--t-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.erp-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.erp-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.erp-card--primary::before  { background: var(--c-primary); }
+.erp-card--success::before  { background: var(--c-success); }
+.erp-card--warning::before  { background: var(--c-warning); }
+.erp-card--danger::before   { background: var(--c-danger); }
+.erp-card--purple::before   { background: var(--c-purple); }
+.erp-card--info::before     { background: var(--c-info); }
+
+.erp-card-icon {
+  width: 38px; height: 38px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  margin-bottom: var(--space-sm);
+}
+
+.erp-card--primary .erp-card-icon  { background: var(--c-primary-light); color: var(--c-primary-dark); }
+.erp-card--success .erp-card-icon  { background: var(--c-success-bg); color: var(--c-success); }
+.erp-card--warning .erp-card-icon  { background: var(--c-warning-bg); color: var(--c-warning); }
+.erp-card--danger  .erp-card-icon  { background: var(--c-danger-bg); color: var(--c-danger); }
+.erp-card--purple  .erp-card-icon  { background: var(--c-purple-light); color: var(--c-purple); }
+
+.erp-card-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--c-navy);
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+.erp-card-label {
+  font-size: 0.78rem;
+  color: var(--c-text-3);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+/* ── Filtros ─────────────────────────────────────────────────── */
+.erp-filters {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  margin-bottom: var(--space-lg);
+  box-shadow: var(--shadow-xs);
+}
+
+.erp-filters-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-md);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--c-text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.erp-filters-header i { color: var(--c-primary); }
+
+.erp-filters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-md);
+  align-items: end;
+}
+
+/* ── Form controls ───────────────────────────────────────────── */
+.erp-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--c-text-2);
+  margin-bottom: 5px;
+  letter-spacing: 0.2px;
+}
+
+.erp-input,
+.erp-select {
+  width: 100%;
+  padding: 7px 12px;
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--c-text-1);
+  background: var(--c-surface);
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  line-height: 1.5;
+}
+
+.erp-input:focus,
+.erp-select:focus {
+  outline: none;
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 3px rgba(14,165,233,.12);
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn-erp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.btn-erp:focus-visible { outline: 3px solid var(--c-primary); outline-offset: 2px; }
+
+.btn-erp-primary {
+  background: var(--c-primary);
+  color: #fff;
+  border-color: var(--c-primary);
+}
+.btn-erp-primary:hover { background: var(--c-primary-dark); border-color: var(--c-primary-dark); }
+
+.btn-erp-secondary {
+  background: var(--c-surface);
+  color: var(--c-text-2);
+  border-color: var(--c-border);
+}
+.btn-erp-secondary:hover { background: var(--c-bg); border-color: #cbd5e1; color: var(--c-text-1); }
+
+.btn-erp-ghost {
+  background: transparent;
+  color: var(--c-text-3);
+  border-color: transparent;
+}
+.btn-erp-ghost:hover { background: var(--c-bg); color: var(--c-text-2); }
+
+.btn-erp-icon {
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+}
+
+/* Ações na tabela — compactos */
+.btn-act {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; height: 30px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all var(--t-fast);
+}
+
+.btn-act-edit    { background: var(--c-primary-light); color: var(--c-primary-dark); border-color: #bae6fd; }
+.btn-act-edit:hover { background: var(--c-primary); color: #fff; }
+
+.btn-act-warn    { background: var(--c-warning-bg); color: var(--c-warning); border-color: #fde68a; }
+.btn-act-warn:hover { background: var(--c-warning); color: #fff; }
+
+.btn-act-success { background: var(--c-success-bg); color: var(--c-success); border-color: #a7f3d0; }
+.btn-act-success:hover { background: var(--c-success); color: #fff; }
+
+.btn-act-danger  { background: var(--c-danger-bg); color: var(--c-danger); border-color: #fecaca; }
+.btn-act-danger-hover:hover { background: var(--c-danger); color: #fff; }
+
+.btn-act-secondary { background: var(--c-bg); color: var(--c-text-2); border-color: var(--c-border); }
+.btn-act-secondary:hover { background: var(--c-navy-3); color: #fff; }
+
+.btn-act-purple { background: var(--c-purple-light); color: var(--c-purple); border-color: #ddd6fe; }
+.btn-act-purple:hover { background: var(--c-purple); color: #fff; }
+
+/* Grupo de ações */
+.act-group { display: flex; gap: 4px; align-items: center; }
+
+/* ── Tabela ERP ───────────────────────────────────────────────── */
+.erp-table-wrapper {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+/* Override DataTables */
+.erp-table-wrapper .dataTables_wrapper {
+  padding: var(--space-md);
+}
+
+.erp-table-wrapper .dataTables_filter input {
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  padding: 6px 12px;
+  font-size: 13px;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+.erp-table-wrapper .dataTables_filter input:focus {
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 3px rgba(14,165,233,.12);
+  outline: none;
+}
+
+table.erp-table {
+  width: 100% !important;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+}
+
+table.erp-table thead th {
+  background: var(--c-bg);
+  color: var(--c-text-2);
+  font-weight: 600;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 10px 14px;
+  border-bottom: 1.5px solid var(--c-border);
+  white-space: nowrap;
+}
+
+table.erp-table thead th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+table.erp-table thead th:last-child  { border-radius: 0 var(--radius-sm) 0 0; }
+
+table.erp-table tbody td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--c-border-light);
+  color: var(--c-text-1);
+  vertical-align: middle;
+}
+
+table.erp-table tbody tr:last-child td { border-bottom: none; }
+
+table.erp-table tbody tr {
+  transition: background var(--t-fast);
+}
+table.erp-table tbody tr:hover td { background: var(--c-primary-50); }
+
+/* Sorting indicators */
+table.erp-table thead th.sorting::after,
+table.erp-table thead th.sorting_asc::after,
+table.erp-table thead th.sorting_desc::after {
+  opacity: 0.5;
+}
+
+/* ── Badges ──────────────────────────────────────────────────── */
+.erp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 9px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+}
+
+/* Status genérico */
+.badge-active    { background: #dcfce7; color: #166534; }
+.badge-inactive  { background: #fee2e2; color: #991b1b; }
+.badge-pending   { background: #fef9c3; color: #854d0e; }
+.badge-info      { background: #dbeafe; color: #1e40af; }
+.badge-neutral   { background: var(--c-bg); color: var(--c-text-2); border: 1px solid var(--c-border); }
+
+/* Pagamentos */
+.badge-pgt-pendente   { background: #fef9c3; color: #92400e; }
+.badge-pgt-confirmado { background: #dcfce7; color: #166534; }
+.badge-pgt-cancelado  { background: #fee2e2; color: #991b1b; }
+
+/* Produtos/Estoque */
+.badge-bloqueado { background: #fee2e2; color: #991b1b; }
+.badge-ativo     { background: #dcfce7; color: #166534; }
+
+/* Movimentações */
+.badge-mov-ENTRADA { background: #dcfce7; color: #166534; }
+.badge-mov-SAIDA   { background: #fee2e2; color: #991b1b; }
+.badge-mov-AJUSTE  { background: #fef9c3; color: #92400e; }
+
+/* Vendas */
+.badge-venda-aberta     { background: #dbeafe; color: #1e40af; }
+.badge-venda-finalizada { background: #dcfce7; color: #166534; }
+.badge-venda-cancelada  { background: #fee2e2; color: #991b1b; }
+
+/* Usuários */
+.badge-perfil-operador      { background: var(--c-bg); color: var(--c-text-2); border: 1px solid var(--c-border); }
+.badge-perfil-gerente       { background: #dbeafe; color: #1e40af; }
+.badge-perfil-administrador { background: #ede9fe; color: #5b21b6; }
+
+/* Pagamento tipos */
+.badge-tipo-pix        { background: #d1fae5; color: #065f46; }
+.badge-tipo-convenio   { background: #ede9fe; color: #5b21b6; }
+.badge-tipo-dinheiro   { background: #dcfce7; color: #166534; }
+.badge-tipo-debito     { background: #dbeafe; color: #1e40af; }
+.badge-tipo-credito    { background: #fce7f3; color: #9d174d; }
+.badge-tipo-outros     { background: var(--c-bg); color: var(--c-text-2); border: 1px solid var(--c-border); }
+
+/* ── DataTables buttons override ────────────────────────────── */
+.dt-buttons {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.dt-button {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px !important;
+  border-radius: var(--radius-sm) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  border: 1.5px solid var(--c-border) !important;
+  background: var(--c-surface) !important;
+  color: var(--c-text-2) !important;
+  cursor: pointer;
+  transition: all var(--t-fast) !important;
+  box-shadow: none !important;
+}
+
+.dt-button:hover {
+  background: var(--c-bg) !important;
+  border-color: #cbd5e1 !important;
+  color: var(--c-text-1) !important;
+}
+
+/* Paginação */
+.dataTables_paginate .paginate_button {
+  padding: 4px 10px !important;
+  border-radius: var(--radius-sm) !important;
+  font-size: 12px !important;
+  border: 1.5px solid transparent !important;
+  color: var(--c-text-2) !important;
+}
+
+.dataTables_paginate .paginate_button.current {
+  background: var(--c-primary) !important;
+  border-color: var(--c-primary) !important;
+  color: #fff !important;
+}
+
+.dataTables_paginate .paginate_button:hover:not(.current) {
+  background: var(--c-bg) !important;
+  border-color: var(--c-border) !important;
+  color: var(--c-text-1) !important;
+}
+
+/* length select */
+.dataTables_length select {
+  border: 1.5px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+/* ── Select2 override ────────────────────────────────────────── */
+.select2-container--default .select2-selection--single {
+  border: 1.5px solid var(--c-border) !important;
+  border-radius: var(--radius-sm) !important;
+  height: 36px !important;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast) !important;
+}
+
+.select2-container--default.select2-container--open .select2-selection--single,
+.select2-container--default.select2-container--focus .select2-selection--single {
+  border-color: var(--c-primary) !important;
+  box-shadow: 0 0 0 3px rgba(14,165,233,.12) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 33px !important;
+  padding-left: 12px !important;
+  font-size: 13px !important;
+  color: var(--c-text-1) !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 34px !important;
+}
+
+.select2-dropdown {
+  border: 1.5px solid var(--c-border) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.select2-container--default .select2-results__option--highlighted {
+  background: var(--c-primary) !important;
+}
+
+/* ── Text helpers ─────────────────────────────────────────────── */
+.text-muted-erp { color: var(--c-text-3); }
+.text-mono { font-family: 'Fira Code', 'Courier New', monospace; font-size: 12px; }
+
+/* ── Barcode pill ────────────────────────────────────────────── */
+.barcode-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-pill);
+  padding: 2px 10px;
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  color: var(--c-navy-3);
+  letter-spacing: 0.5px;
+}
+.barcode-pill i { color: var(--c-text-3); font-size: 11px; }
+
+/* ── Reload button (borderless) ──────────────────────────────── */
+.btn-reload {
+  background: none;
+  border: none;
+  color: var(--c-text-3);
+  cursor: pointer;
+  padding: 5px;
+  border-radius: var(--radius-sm);
+  transition: color var(--t-fast), background var(--t-fast);
+  font-size: 15px;
+}
+.btn-reload:hover { color: var(--c-primary); background: var(--c-primary-light); }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .erp-filters-grid { grid-template-columns: 1fr 1fr; }
+  .erp-cards { grid-template-columns: 1fr 1fr; }
+  .erp-header { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .erp-filters-grid { grid-template-columns: 1fr; }
+  .erp-cards { grid-template-columns: 1fr; }
+}

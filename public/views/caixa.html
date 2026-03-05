@@ -1,0 +1,228 @@
+<!-- caixa.html — refatorado (estrutura SPA injetável) -->
+<!-- Este módulo usa estrutura standalone com modal próprio.
+     O JS (caixa.js) permanece separado conforme arquitetura. -->
+
+<style>
+/* Sobrescritas específicas do módulo Caixa */
+.caixa-detalhe-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+@media (max-width: 640px) {
+  .caixa-detalhe-grid { grid-template-columns: 1fr; }
+}
+
+.caixa-dl dt {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--c-text-3);
+  margin-bottom: 2px;
+}
+.caixa-dl dd {
+  font-size: 13px;
+  color: var(--c-text-1);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.caixa-pagto-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+@media (max-width: 640px) { .caixa-pagto-grid { grid-template-columns: 1fr 1fr; } }
+
+.caixa-pagto-item {
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.caixa-pagto-icon { font-size: 1.3rem; }
+.caixa-pagto-label { font-size: 0.72rem; color: var(--c-text-3); text-transform: uppercase; letter-spacing: 0.4px; }
+.caixa-pagto-value { font-size: 1rem; font-weight: 700; color: var(--c-navy); }
+
+.caixa-resumo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+@media (max-width: 640px) { .caixa-resumo-grid { grid-template-columns: 1fr 1fr; } }
+
+.caixa-resumo-card {
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  text-align: center;
+}
+.caixa-resumo-card .val { font-size: 1.1rem; font-weight: 700; display: block; }
+.caixa-resumo-card .lbl { font-size: 0.72rem; opacity: 0.8; margin-top: 2px; }
+
+.caixa-resumo-card--green  { background: var(--c-success-bg); color: var(--c-success); }
+.caixa-resumo-card--yellow { background: var(--c-warning-bg); color: var(--c-warning); }
+.caixa-resumo-card--blue   { background: var(--c-info-bg); color: var(--c-info); }
+.caixa-resumo-card--gray   { background: var(--c-bg); color: var(--c-text-2); border: 1px solid var(--c-border); }
+
+.caixa-diff-box {
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  margin-bottom: var(--space-md);
+  font-size: 13px;
+}
+
+.modal-erp .modal-content {
+  border: none;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+.modal-erp .modal-header {
+  background: var(--c-navy);
+  color: #fff;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: none;
+}
+.modal-erp .modal-header .close { color: #fff; opacity: 0.7; }
+.modal-erp .modal-header .close:hover { opacity: 1; }
+.modal-erp .modal-footer {
+  border-top: 1px solid var(--c-border);
+  padding: var(--space-md) var(--space-lg);
+}
+</style>
+
+<div class="erp-page">
+
+  <!-- Cabeçalho -->
+  <div class="erp-header">
+    <div class="erp-header-left">
+      <h1 class="erp-page-title">
+        <i class="bi bi-cash-stack"></i>
+        Caixas
+      </h1>
+    </div>
+  </div>
+
+  <!-- Cards de resumo -->
+  <div class="erp-cards" id="cards-resumo">
+    <div class="erp-card erp-card--primary">
+      <div class="erp-card-icon"><i class="bi bi-cash-register"></i></div>
+      <div class="erp-card-value" id="card-total-caixas">—</div>
+      <div class="erp-card-label">Caixas Hoje</div>
+    </div>
+    <div class="erp-card erp-card--success">
+      <div class="erp-card-icon"><i class="bi bi-cart-check"></i></div>
+      <div class="erp-card-value" id="card-total-vendas">—</div>
+      <div class="erp-card-label">Vendas Hoje</div>
+    </div>
+    <div class="erp-card erp-card--warning">
+      <div class="erp-card-icon"><i class="bi bi-arrow-down-circle"></i></div>
+      <div class="erp-card-value" id="card-total-sangrias">—</div>
+      <div class="erp-card-label">Sangrias Hoje</div>
+    </div>
+    <div class="erp-card erp-card--danger">
+      <div class="erp-card-icon"><i class="bi bi-door-open"></i></div>
+      <div class="erp-card-value" id="card-caixas-abertos">—</div>
+      <div class="erp-card-label">Caixas Abertos</div>
+    </div>
+  </div>
+
+  <!-- Filtros -->
+  <div class="erp-filters">
+    <div class="erp-filters-header">
+      <i class="bi bi-funnel"></i> Filtros
+    </div>
+    <div class="erp-filters-grid">
+      <div>
+        <label class="erp-label" for="filtro-data-inicio">Data início</label>
+        <input type="date" id="filtro-data-inicio" class="erp-input">
+      </div>
+      <div>
+        <label class="erp-label" for="filtro-data-fim">Data fim</label>
+        <input type="date" id="filtro-data-fim" class="erp-input">
+      </div>
+      <div>
+        <label class="erp-label" for="filtro-numero-pdv">PDV</label>
+        <input type="text" id="filtro-numero-pdv" class="erp-input" placeholder="Ex: 01">
+      </div>
+      <div>
+        <label class="erp-label" for="filtro-status">Status</label>
+        <select id="filtro-status" class="erp-select">
+          <option value="">Todos</option>
+          <option value="aberto">Aberto</option>
+          <option value="fechado">Fechado</option>
+        </select>
+      </div>
+      <div style="display:flex; align-items:flex-end; gap: 8px;">
+        <button id="btn-filtrar" class="btn-erp btn-erp-primary" style="flex:1;">
+          <i class="bi bi-search"></i> Filtrar
+        </button>
+        <button id="btn-limpar-filtros" class="btn-erp btn-erp-secondary">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <div class="erp-table-wrapper">
+    <table id="tabela-caixas" class="erp-table display" style="width:100%">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>PDV</th>
+          <th>Operador</th>
+          <th>Abertura</th>
+          <th>Fechamento</th>
+          <th>Vendas</th>
+          <th>Total Geral</th>
+          <th>Sangrias</th>
+          <th>Saldo Esp.</th>
+          <th>Diferença</th>
+          <th>Status</th>
+          <th class="no-export">Ações</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ── Modal Detalhe do Caixa ── -->
+<div class="modal fade modal-erp" id="modal-detalhe-caixa" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <i class="bi bi-cash-stack me-2"></i>Detalhe da Sessão de Caixa
+        </h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body" id="modal-detalhe-body">
+        <!-- preenchido via JS -->
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn-erp btn-erp-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" class="btn-erp btn-erp-primary" id="btn-imprimir-espelho">
+          <i class="bi bi-printer"></i> Imprimir Espelho
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

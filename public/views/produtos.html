@@ -1,87 +1,80 @@
+<!-- produtos.html — refatorado -->
 <style>
-  .filtro-box {
-    border: 1px solid rgba(0,123,255,0.2);
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding-top: 2.5rem;
-    position: relative;
-  }
-  .filtro-titulo {
-    position: absolute; top: -1.2rem; left: 1rem;
-    background-color: #f8f9fa;
-    border: 1px solid rgba(0,123,255,0.2);
-    border-radius: 12px; padding: 4px 12px;
-    font-size: 0.95rem; color: #007bff;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  }
-  .badge-bloqueado  { background: #dc3545; color: #fff; }
-  .badge-ativo      { background: #198754; color: #fff; }
-  .badge-mov-ENTRADA { background: #198754; color: #fff; }
-  .badge-mov-SAIDA   { background: #dc3545; color: #fff; }
-  .badge-mov-AJUSTE  { background: #ffc107; color: #212529; }
+.badge-unidade-peso { background: #fef9c3; color: #92400e; }
+.badge-unidade-un   { background: var(--c-bg, #f8fafc); color: var(--c-text-2, #475569); border: 1px solid var(--c-border, #e2e8f0); }
 </style>
 
-<div class="container-fluid bg-white p-4 rounded shadow">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4 class="mb-0">
-      <i class="bi bi-box-seam"></i> Produtos
-      <button data-submit class="btn btn-outline-secondary" style="border:none;">
+<div class="erp-page">
+
+  <!-- Cabeçalho -->
+  <div class="erp-header">
+    <div class="erp-header-left">
+      <h1 class="erp-page-title">
+        <i class="bi bi-box-seam"></i>
+        Produtos
+      </h1>
+      <button data-submit class="btn-reload" title="Recarregar">
         <i class="bi bi-arrow-clockwise"></i>
       </button>
-    </h4>
-    <button data-create class="btn btn-outline-primary">
-      <i class="bi bi-plus"></i> Criar
-    </button>
+    </div>
+    <div class="erp-header-actions">
+      <button data-create class="btn-erp btn-erp-primary">
+        <i class="bi bi-plus-lg"></i> Criar Produto
+      </button>
+    </div>
   </div>
 
   <!-- Filtros -->
-  <div class="filtro-box mb-4 p-3 rounded position-relative">
-    <div class="filtro-titulo px-3">
-      <span class="font-weight-bold mb-0">Filtros</span>
+  <div class="erp-filters">
+    <div class="erp-filters-header">
+      <i class="bi bi-funnel"></i> Filtros
     </div>
-    <div class="row mt-2 g-3">
-      <div class="col-md-3">
-        <label for="filtro_status_produto">Status:</label>
-        <select class="form-control" id="filtro_status_produto">
+    <div class="erp-filters-grid">
+      <div>
+        <label class="erp-label" for="filtro_status_produto">Status</label>
+        <select class="erp-select" id="filtro_status_produto">
           <option value="">Todos</option>
           <option value="0">Ativo</option>
           <option value="1">Bloqueado</option>
         </select>
       </div>
-      <div class="col-md-3">
-        <label for="filtro_unidade_base">Tipo de produto:</label>
-        <select class="form-control" id="filtro_unidade_base">
+      <div>
+        <label class="erp-label" for="filtro_unidade_base">Tipo de produto</label>
+        <select class="erp-select" id="filtro_unidade_base">
           <option value="">Todos</option>
           <option value="UN">UN — Unidades</option>
           <option value="G">G — Peso (balança)</option>
         </select>
       </div>
-      <div class="col-md-4">
-        <label for="filtro_fornecedor">Fornecedor:</label>
-        <select class="form-control" id="filtro_fornecedor">
-          <option value="">Todos</option>
+      <div style="grid-column: span 2;">
+        <label class="erp-label" for="filtro_fornecedor">Fornecedor</label>
+        <select class="erp-select" id="filtro_fornecedor">
+          <option value="">Todos os fornecedores</option>
         </select>
       </div>
     </div>
   </div>
 
   <!-- Tabela -->
-  <table id="tabela-produtos" class="display table table-striped" style="width:100%;font-size:14px;">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Cód. Interno</th>
-        <th>Preço Venda</th>
-        <th>Custo</th>
-        <th>Fat. Embalagem</th>
-        <th>Unidade</th>
-        <th>Fornecedor</th>
-        <th>Status</th>
-        <th>Última Alteração</th>
-        <th>Qtd. Estoque</th>
-        <th class="no-export" width="18%">Ações</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <div class="erp-table-wrapper">
+    <table id="tabela-produtos" class="erp-table display" style="width:100%">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Cód. Interno</th>
+          <th>Preço Venda</th>
+          <th>Custo</th>
+          <th>Fat. Embalagem</th>
+          <th>Unidade</th>
+          <th>Fornecedor</th>
+          <th>Status</th>
+          <th>Última Alteração</th>
+          <th>Qtd. Estoque</th>
+          <th class="no-export">Ações</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
 </div>

@@ -1,114 +1,44 @@
-<style>
-  table.dataTable td img {
-    width: 50px; height: 50px;
-    object-fit: contain; display: block;
-    margin: 0; padding: 0; border-radius: 8px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    position: relative; z-index: 1;
-  }
-  table.dataTable td img:hover {
-    transform: scale(5) translateX(20px);
-    z-index: 10;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  }
-  .filtro-box {
-    border: 1px solid rgba(0,123,255,0.2);
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding-top: 2.5rem;
-    position: relative;
-  }
-  .filtro-titulo {
-    position: absolute; top: -1.2rem; left: 1rem;
-    background-color: #f8f9fa;
-    border: 1px solid rgba(0,123,255,0.2);
-    border-radius: 12px; padding: 4px 12px;
-    font-size: 0.95rem; color: #007bff;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-  }
-  .badge-perfil-operador     { background:#6c757d; color:#fff; }
-  .badge-perfil-gerente      { background:#0d6efd; color:#fff; }
-  .badge-perfil-administrador{ background:#198754; color:#fff; }
-</style>
+<!-- usuarios.html — refatorado -->
+<!-- ATENÇÃO: o onclick inline do botão Criar foi movido para usuarios.js (document.querySelector('[data-create]')) -->
 
-<div class="container-fluid bg-white p-4 rounded shadow">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h4 class="mb-0">
-      <i class="bi bi-people"></i> Usuários
-      <button data-submit class="btn btn-outline-secondary" style="border:none;">
+<div class="erp-page">
+
+  <!-- Cabeçalho -->
+  <div class="erp-header">
+    <div class="erp-header-left">
+      <h1 class="erp-page-title">
+        <i class="bi bi-people"></i>
+        Usuários
+      </h1>
+      <button data-submit class="btn-reload" title="Recarregar">
         <i class="bi bi-arrow-clockwise"></i>
       </button>
-    </h4>
-
-    <button data-create class="btn btn-outline-primary" onclick="MODAL.openFormModal({
-      title: 'Criar usuário',
-      method: 'POST',
-      action: '/api/users',
-      inputs: [
-        { label: 'Nome completo', name: 'nome',     type: 'text' },
-        { label: 'Login',        name: 'login',    type: 'text' },
-        {
-          label: 'CPF (somente números)',
-          name: 'cpf',
-          type: 'text',
-          attributesRender: { onblur: `this.value = this.value.replace(/[^0-9]/g, '');` }
-        },
-        { label: 'E-mail',   name: 'email',    type: 'email' },
-        {
-          label: 'Telefone (somente números)',
-          name: 'telefone',
-          type: 'text',
-          attributesRender: { onblur: `this.value = this.value.replace(/[^0-9]/g, '');` }
-        },
-        { label: 'Senha',    name: 'senha',    type: 'password' },
-        {
-          label: 'Perfil',
-          name: 'perfil',
-          type: 'select',
-          values: {
-            'operador':      'Operador',
-            'gerente':       'Gerente',
-            'administrador': 'Administrador'
-          }
-        }
-      ],
-      submitText: 'Criar',
-      onSubmit: (formData, form, modal) => {
-        fetch(form.action, {
-          headers: { 'Content-type': 'application/json' },
-          method: 'POST',
-          body: FormData.toJSON(formData)
-        })
-        .then(res => res.json())
-        .then((data) => {
-          new Alerta(data.status, '', data.message);
-          document.querySelector('[data-submit]').click();
-          modal.hide();
-        });
-      }
-    });">
-      <i class="bi bi-plus"></i> Criar
-    </button>
+    </div>
+    <div class="erp-header-actions">
+      <button data-create class="btn-erp btn-erp-primary">
+        <i class="bi bi-person-plus"></i> Criar Usuário
+      </button>
+    </div>
   </div>
 
   <!-- Filtros -->
-  <div class="filtro-box mb-4 p-3 rounded position-relative">
-    <div class="filtro-titulo px-3">
-      <span class="font-weight-bold mb-0">Filtros</span>
+  <div class="erp-filters">
+    <div class="erp-filters-header">
+      <i class="bi bi-funnel"></i> Filtros
     </div>
-    <div class="row mt-2">
-      <div class="form-group col pl-0">
-        <label for="filtro_perfil">Perfil:</label>
-        <select class="form-control" id="filtro_perfil">
+    <div class="erp-filters-grid">
+      <div>
+        <label class="erp-label" for="filtro_perfil">Perfil</label>
+        <select class="erp-select" id="filtro_perfil">
           <option value="">Todos</option>
           <option value="operador">Operador</option>
           <option value="gerente">Gerente</option>
           <option value="administrador">Administrador</option>
         </select>
       </div>
-      <div class="form-group col pl-0">
-        <label for="filtro_status">Status:</label>
-        <select class="form-control" id="filtro_status">
+      <div>
+        <label class="erp-label" for="filtro_status">Status</label>
+        <select class="erp-select" id="filtro_status">
           <option value="">Todos</option>
           <option value="ativado">Ativados</option>
           <option value="desativado">Desativados</option>
@@ -118,21 +48,24 @@
   </div>
 
   <!-- Tabela -->
-  <table id="tabela" class="display table table-striped" style="width:100%;font-size:14px;">
-    <thead>
-      <tr>
-        <th>Nome</th>
-        <th>Login</th>
-        <th>CPF</th>
-        <th>E-mail</th>
-        <th>Telefone</th>
-        <th>Perfil</th>
-        <th>Status</th>
-        <th>Criado em</th>
-        <th>Último login</th>
-        <th class="no-export" width="15%">Ações</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+  <div class="erp-table-wrapper">
+    <table id="tabela" class="erp-table display" style="width:100%">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Login</th>
+          <th>CPF</th>
+          <th>E-mail</th>
+          <th>Telefone</th>
+          <th>Perfil</th>
+          <th>Status</th>
+          <th>Criado em</th>
+          <th>Último login</th>
+          <th class="no-export">Ações</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
 </div>

@@ -1,5 +1,4 @@
 // paginas/vendas.js
-// Orquestração da tela de Vendas
 
 window.PageFunctions['vendas'] = function () {
 
@@ -14,7 +13,6 @@ window.PageFunctions['vendas'] = function () {
   const titlePage = document.querySelector('[app-title-page]');
   if (titlePage) titlePage.innerText = '';
 
-  // ── Helpers ─────────────────────────────────────────────────────────────────
   function fmtMoeda(v) {
     return parseFloat(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
@@ -30,12 +28,10 @@ window.PageFunctions['vendas'] = function () {
     return map[s] || `<span class="badge bg-secondary">${s}</span>`;
   }
 
-  // ── Select2 filtros ─────────────────────────────────────────────────────────
   $('#filtro_venda_status, #filtro_venda_total_op').each(function() {
     $(this).select2({ placeholder: 'Todos', allowClear: true, width: '100%' });
   });
 
-  // ── Colunas ─────────────────────────────────────────────────────────────────
   const colunas = [
     { data: 'numero_venda' },
     { data: 'data_venda',    render: d => fmtData(d) },
@@ -53,7 +49,7 @@ window.PageFunctions['vendas'] = function () {
         const isAberta = row.status === 'aberta';
         return `
           <button class="btn btn-sm btn-info me-1" title="Ver detalhes"
-            onclick="verDetalhesVenda(${row.id}, '${window.escHtml(row.numero_venda)}')">
+            onclick="verDetalhesVenda(${row.id}, '${window.escHtml(row.numero_venda)}', '${row.status}', '${row.total}', '${row.desconto}', '${row.acrescimo}')">
             <i class="bi bi-eye"></i>
           </button>
           ${isAberta ? `
@@ -69,7 +65,6 @@ window.PageFunctions['vendas'] = function () {
     },
   ];
 
-  // ── Tabela ──────────────────────────────────────────────────────────────────
   new Table('#tabela-vendas', colunas, '/api/vendas', {
     titleFile: 'Vendas', filename: 'vendas',
     mergeButtons: false, autoWidth: false,
@@ -97,7 +92,6 @@ window.PageFunctions['vendas'] = function () {
     },
   });
 
-  // ── Recarregar / filtros ────────────────────────────────────────────────────
   document.querySelector('[data-submit]').addEventListener('click', () => {
     $('#tabela-vendas').DataTable().ajax.reload();
   });
@@ -108,16 +102,13 @@ window.PageFunctions['vendas'] = function () {
     $('#tabela-vendas').DataTable().ajax.reload();
   });
 
-  // ── Nova Venda ───────────────────────────────────────────────────────────────
   let itensCarrinho = [];
-
   document.querySelector('[data-create]').addEventListener('click', () => {
     itensCarrinho = [];
     abrirModalNovaVenda();
   });
 
   function abrirModalNovaVenda() {
-    // Renderiza o modal de nova venda com tabela de itens inline
     MODAL.openFormModal({
       title: 'Nova Venda',
       method: 'POST',
@@ -130,12 +121,11 @@ window.PageFunctions['vendas'] = function () {
       ],
       submitText: 'Criar Venda',
       onOpen: (modalEl) => {
-        // Adiciona seção de itens após os campos
         const form = modalEl.querySelector('form');
         form.insertAdjacentHTML('beforeend', `
           <hr>
-          <h6>Itens da venda</h6>
-          <div class="row g-2 mb-2">
+          <h6 class="fw-bold text-primary"><i class="bi bi-box-seam"></i> Itens da venda</h6>
+          <div class="row g-2 mb-3">
             <div class="col-md-5">
               <select class="form-control" id="venda_select_produto" placeholder="Buscar produto..."></select>
             </div>
@@ -147,20 +137,20 @@ window.PageFunctions['vendas'] = function () {
             </div>
             <div class="col-md-3">
               <button type="button" class="btn btn-outline-primary w-100" id="btn_add_item">
-                <i class="bi bi-plus"></i> Adicionar
+                <i class="bi bi-plus-lg"></i> Adicionar
               </button>
             </div>
           </div>
-          <div class="table-responsive">
-            <table class="table table-sm table-bordered" id="tabela-itens-venda">
+          <div class="table-responsive rounded border">
+            <table class="table table-sm table-hover mb-0" id="tabela-itens-venda">
               <thead class="table-light">
-                <tr><th>Produto</th><th>Qtd</th><th>Unitário</th><th>Subtotal</th><th></th></tr>
+                <tr><th>Produto</th><th class="text-center">Qtd</th><th class="text-end">Unitário</th><th class="text-end">Subtotal</th><th class="text-center">Ações</th></tr>
               </thead>
               <tbody id="tbody-itens"></tbody>
-              <tfoot>
+              <tfoot class="bg-light">
                 <tr>
-                  <td colspan="3" class="text-end fw-bold">Total itens:</td>
-                  <td id="venda-total-itens" class="fw-bold">R$ 0,00</td>
+                  <td colspan="3" class="text-end fw-bold">Total Itens:</td>
+                  <td id="venda-total-itens" class="text-end fw-bold text-success fs-5">R$ 0,00</td>
                   <td></td>
                 </tr>
               </tfoot>
@@ -168,7 +158,6 @@ window.PageFunctions['vendas'] = function () {
           </div>
         `);
 
-        // Select2 produto
         $('#venda_select_produto').select2({
           placeholder: 'Buscar produto pelo nome...',
           allowClear: true,
@@ -188,9 +177,7 @@ window.PageFunctions['vendas'] = function () {
           $('#venda_preco').val(parseFloat(e.params.data.preco || 0).toFixed(2));
         });
 
-        // Adicionar item
         document.getElementById('btn_add_item').addEventListener('click', () => {
-          const selEl  = document.getElementById('venda_select_produto');
           const prodId = $('#venda_select_produto').val();
           const nome   = $('#venda_select_produto option:selected').text();
           const qtd    = parseInt(document.getElementById('venda_qtd').value);
@@ -212,12 +199,11 @@ window.PageFunctions['vendas'] = function () {
             const sub = item.quantidade * item.valor_unitario;
             total += sub;
             return `<tr>
-              <td>${window.escHtml(item.produto_nome)}</td>
-              <td>${item.quantidade}</td>
-              <td>${parseFloat(item.valor_unitario).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</td>
-              <td>${sub.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</td>
-              <td><button type="button" class="btn btn-sm btn-danger" onclick="window._removeItemVenda(${i})">
-                <i class="bi bi-trash"></i></button></td>
+              <td class="align-middle">${window.escHtml(item.produto_nome)}</td>
+              <td class="align-middle text-center">${item.quantidade}</td>
+              <td class="align-middle text-end">${parseFloat(item.valor_unitario).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</td>
+              <td class="align-middle text-end fw-bold">${sub.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</td>
+              <td class="align-middle text-center"><button type="button" class="btn btn-sm btn-outline-danger" onclick="window._removeItemVenda(${i})"><i class="bi bi-trash"></i></button></td>
             </tr>`;
           }).join('');
           document.getElementById('venda-total-itens').textContent =
@@ -257,8 +243,8 @@ window.PageFunctions['vendas'] = function () {
     });
   }
 
-  // ── Ver detalhes ─────────────────────────────────────────────────────────────
-  window.verDetalhesVenda = function (id, numero) {
+  // Novo design modal Detalhes
+  window.verDetalhesVenda = function (id, numero, statusStr, total, desconto, acrescimo) {
     fetch(`/api/vendas/itens?id=${id}`)
       .then(r => r.json())
       .then(res => {
@@ -268,45 +254,77 @@ window.PageFunctions['vendas'] = function () {
 
         const rowsItens = itens.length
           ? itens.map(i => `<tr>
-              <td>${window.escHtml(i.produto_nome)}</td>
-              <td>${i.quantidade}</td>
-              <td>${fmtMoeda(i.valor_unitario)}</td>
-              <td>${fmtMoeda(i.subtotal)}</td>
+              <td class="align-middle">${window.escHtml(i.produto_nome)}</td>
+              <td class="align-middle text-center">${i.quantidade}</td>
+              <td class="align-middle text-end">${fmtMoeda(i.valor_unitario)}</td>
+              <td class="align-middle text-end fw-bold">${fmtMoeda(i.subtotal)}</td>
             </tr>`).join('')
           : '<tr><td colspan="4" class="text-center text-muted">Sem itens.</td></tr>';
 
         const rowsPagtos = pagtos.length
           ? pagtos.map(p => `<tr>
-              <td>${p.tipo_pagamento}</td>
-              <td>${fmtMoeda(p.valor)}</td>
-              <td><span class="badge bg-${p.status==='confirmado'?'success':p.status==='cancelado'?'danger':'warning'}">${p.status}</span></td>
-              <td>${p.referencia_externa || '—'}</td>
+              <td class="align-middle"><i class="bi bi-cash-coin text-secondary me-1"></i> ${p.tipo_pagamento}</td>
+              <td class="align-middle text-end fw-bold">${fmtMoeda(p.valor)}</td>
+              <td class="align-middle text-center"><span class="badge bg-${p.status==='confirmado'?'success':p.status==='cancelado'?'danger':'warning'}">${p.status}</span></td>
+              <td class="align-middle">${p.referencia_externa || '—'}</td>
             </tr>`).join('')
-          : '<tr><td colspan="4" class="text-center text-muted">Sem pagamentos.</td></tr>';
+          : '<tr><td colspan="4" class="text-center text-muted py-3">Nenhum pagamento registrado.</td></tr>';
 
         const html = `
-          <h6 class="mt-2">Itens</h6>
-          <div class="table-responsive"><table class="table table-sm table-bordered">
-            <thead class="table-light"><tr><th>Produto</th><th>Qtd</th><th>Unitário</th><th>Subtotal</th></tr></thead>
-            <tbody>${rowsItens}</tbody>
-          </table></div>
-          <h6 class="mt-3">Pagamentos</h6>
-          <div class="table-responsive"><table class="table table-sm table-bordered">
-            <thead class="table-light"><tr><th>Tipo</th><th>Valor</th><th>Status</th><th>Referência</th></tr></thead>
-            <tbody>${rowsPagtos}</tbody>
-          </table></div>`;
+          <div class="row mb-4 g-3">
+            <div class="col-md-4">
+              <div class="card bg-light border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                  <h6 class="text-muted mb-1">Status da Venda</h6>
+                  <div class="fs-5">${badgeStatus(statusStr)}</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card bg-light border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                  <h6 class="text-muted mb-1">Total da Venda</h6>
+                  <div class="fs-4 fw-bold text-primary">${fmtMoeda(total)}</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card bg-light border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                  <h6 class="text-muted mb-1">Desc / Acrésc</h6>
+                  <div class="fs-6 text-danger"><i class="bi bi-arrow-down-short"></i> ${fmtMoeda(desconto)}</div>
+                  <div class="fs-6 text-success"><i class="bi bi-arrow-up-short"></i> ${fmtMoeda(acrescimo)}</div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-        MODAL.openAlertModal({
-          type: 'info',
-          title: `Detalhes: ${numero}`,
-          subtitle: html,
-          confirmText: 'Fechar',
-          onConfirm: () => MODAL.hideModal(),
+          <h6 class="fw-bold text-secondary mb-2"><i class="bi bi-box-seam me-1"></i> Produtos</h6>
+          <div class="table-responsive rounded border mb-4">
+            <table class="table table-sm table-hover mb-0">
+              <thead class="table-light"><tr><th>Produto</th><th class="text-center">Qtd</th><th class="text-end">Unitário</th><th class="text-end">Subtotal</th></tr></thead>
+              <tbody>${rowsItens}</tbody>
+            </table>
+          </div>
+
+          <h6 class="fw-bold text-secondary mb-2"><i class="bi bi-wallet2 me-1"></i> Pagamentos</h6>
+          <div class="table-responsive rounded border">
+            <table class="table table-sm table-hover mb-0">
+              <thead class="table-light"><tr><th>Tipo</th><th class="text-end">Valor</th><th class="text-center">Status</th><th>Referência</th></tr></thead>
+              <tbody>${rowsPagtos}</tbody>
+            </table>
+          </div>
+        `;
+
+        MODAL.openContentModal({
+          title: `<i class="bi bi-receipt text-primary me-2"></i> Detalhes da Venda <span class="text-muted">#${numero}</span>`,
+          size: 'lg',
+          message: html,
+          buttonText: 'Fechar'
         });
       });
   };
 
-  // ── Finalizar ────────────────────────────────────────────────────────────────
   window.finalizarVenda = function (id, numero) {
     MODAL.openConfirmationModal({
       title: 'Finalizar venda',
@@ -329,7 +347,6 @@ window.PageFunctions['vendas'] = function () {
     });
   };
 
-  // ── Cancelar ─────────────────────────────────────────────────────────────────
   window.cancelarVenda = function (id, numero) {
     MODAL.openConfirmationModal({
       title: 'Cancelar venda',
