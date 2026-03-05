@@ -1,0 +1,116 @@
+<style>
+  .filtro-box {
+    border: 1px solid rgba(0,123,255,0.2);
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding-top: 2.5rem;
+    position: relative;
+  }
+  .filtro-titulo {
+    position: absolute; top: -1.2rem; left: 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid rgba(0,123,255,0.2);
+    border-radius: 12px; padding: 4px 12px;
+    font-size: 0.95rem; color: #007bff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .badge-mov-ENTRADA { background: #198754; color: #fff; }
+  .badge-mov-SAIDA   { background: #dc3545; color: #fff; }
+  .badge-mov-AJUSTE  { background: #ffc107; color: #212529; }
+</style>
+
+<div class="container-fluid bg-white p-4 rounded shadow">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">
+      <i class="bi bi-journal-text"></i> Movimentações de Estoque
+      <button data-submit class="btn btn-outline-secondary" style="border:none;">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </h4>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filtro-box mb-4 p-3 rounded position-relative">
+    <div class="filtro-titulo px-3">
+      <span class="font-weight-bold mb-0">Filtros</span>
+    </div>
+    <div class="row mt-2 g-3">
+      <div class="col-md-3">
+        <label>Produto:</label>
+        <select class="form-control" id="filtro_mov_produto">
+          <option value="">Todos</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label>Tipo:</label>
+        <select class="form-control" id="filtro_mov_tipo">
+          <option value="">Todos</option>
+          <option value="ENTRADA">ENTRADA</option>
+          <option value="SAIDA">SAÍDA</option>
+          <option value="AJUSTE">AJUSTE</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label>Embalagem:</label>
+        <select class="form-control" id="filtro_mov_embalagem">
+          <option value="">Todas</option>
+          <option value="UN">UN — Unidade</option>
+          <option value="CX">CX — Caixa</option>
+          <option value="KG">KG — Quilograma</option>
+          <option value="G">G — Grama</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label>Origem:</label>
+        <select class="form-control" id="filtro_mov_origem">
+          <option value="">Todas</option>
+          <option value="VENDA">VENDA</option>
+          <option value="COMPRA">COMPRA</option>
+          <option value="AJUSTE">AJUSTE</option>
+          <option value="DEVOLUCAO">DEVOLUÇÃO</option>
+          <option value="ESTORNO">ESTORNO</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label>Data início:</label>
+        <input type="date" class="form-control" id="filtro_mov_data_inicio">
+      </div>
+      <div class="col-md-2">
+        <label>Data fim:</label>
+        <input type="date" class="form-control" id="filtro_mov_data_fim">
+      </div>
+      <div class="col-md-2">
+        <label>Qtd.:</label>
+        <select class="form-control" id="filtro_mov_qty_op">
+          <option value="">Qualquer</option>
+          <option value="gt">Maior que</option>
+          <option value="lt">Menor que</option>
+          <option value="eq">Igual a</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label>&nbsp;</label>
+        <input type="number" class="form-control" id="filtro_mov_qty_val"
+          placeholder="Valor" min="0" step="0.001">
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <table id="tabela-movimentacoes" class="display table table-striped" style="width:100%;font-size:14px;">
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Tipo</th>
+        <th>Quantidade</th>
+        <th>Embalagem</th>
+        <th>Cód. Barras</th>
+        <th>Motivo</th>
+        <th>Origem</th>
+        <th>Operador</th>
+        <th>Data/Hora</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>

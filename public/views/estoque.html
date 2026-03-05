@@ -1,0 +1,100 @@
+<style>
+  .filtro-box {
+    border: 1px solid rgba(0,123,255,0.2);
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding-top: 2.5rem;
+    position: relative;
+  }
+  .filtro-titulo {
+    position: absolute; top: -1.2rem; left: 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid rgba(0,123,255,0.2);
+    border-radius: 12px; padding: 4px 12px;
+    font-size: 0.95rem; color: #007bff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .badge-bloqueado { background: #dc3545; color: #fff; }
+  .badge-ativo     { background: #198754; color: #fff; }
+  .estoque-zero    { color: #dc3545; font-weight: bold; }
+</style>
+
+<div class="container-fluid bg-white p-4 rounded shadow">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">
+      <i class="bi bi-boxes"></i> Estoque
+      <button data-submit class="btn btn-outline-secondary" style="border:none;">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </h4>
+    <button data-movimentar class="btn btn-outline-primary">
+      <i class="bi bi-arrow-left-right"></i> Movimentar
+    </button>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filtro-box mb-4 p-3 rounded position-relative">
+    <div class="filtro-titulo px-3">
+      <span class="font-weight-bold mb-0">Filtros</span>
+    </div>
+    <div class="row mt-2 g-3">
+      <div class="col-md-2">
+        <label for="filtro_est_status">Status:</label>
+        <select class="form-control" id="filtro_est_status">
+          <option value="">Todos</option>
+          <option value="0">Ativo</option>
+          <option value="1">Bloqueado</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label for="filtro_est_unidade_base">Tipo produto:</label>
+        <select class="form-control" id="filtro_est_unidade_base">
+          <option value="">Todos</option>
+          <option value="UN">UN — Unidades</option>
+          <option value="G">G — Peso</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <label for="filtro_est_embalagem">Possui embalagem:</label>
+        <select class="form-control" id="filtro_est_embalagem">
+          <option value="">Todas</option>
+          <option value="UN">UN — Unidade</option>
+          <option value="CX">CX — Caixa</option>
+          <option value="KG">KG — Quilo</option>
+          <option value="G">G — Grama</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label for="filtro_qty_op">Quantidade:</label>
+        <select class="form-control" id="filtro_qty_op">
+          <option value="">Qualquer</option>
+          <option value="gt">Maior que</option>
+          <option value="lt">Menor que</option>
+          <option value="eq">Igual a</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label for="filtro_qty_val">&nbsp;</label>
+        <input type="number" class="form-control" id="filtro_qty_val" placeholder="Valor" min="0">
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela — 1 linha por produto -->
+  <table id="tabela-estoque" class="display table table-striped" style="width:100%;font-size:14px;">
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Fat. Embalagem</th>
+        <th>Unidade</th>
+        <th>Códigos de Barras</th>
+        <th>Qtd. em Estoque</th>
+        <th>Última Movim.</th>
+        <th>Atualizado em</th>
+        <th>Status</th>
+        <th class="no-export" width="8%">Ações</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>

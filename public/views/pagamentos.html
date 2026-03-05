@@ -1,0 +1,90 @@
+<style>
+  .filtro-box {
+    border: 1px solid rgba(0,123,255,0.2);
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding-top: 2.5rem;
+    position: relative;
+  }
+  .filtro-titulo {
+    position: absolute; top: -1.2rem; left: 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid rgba(0,123,255,0.2);
+    border-radius: 12px; padding: 4px 12px;
+    font-size: 0.95rem; color: #007bff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .badge-pgt-pendente   { background: #ffc107; color: #212529; }
+  .badge-pgt-confirmado { background: #198754; color: #fff; }
+  .badge-pgt-cancelado  { background: #dc3545; color: #fff; }
+</style>
+
+<div class="container-fluid bg-white p-4 rounded shadow">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">
+      <i class="bi bi-credit-card"></i> Pagamentos
+      <button data-submit class="btn btn-outline-secondary" style="border:none;">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </h4>
+    <button data-create class="btn btn-outline-primary">
+      <i class="bi bi-plus"></i> Cadastrar Pagamento
+    </button>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filtro-box mb-4 p-3 rounded position-relative">
+    <div class="filtro-titulo px-3">
+      <span class="font-weight-bold mb-0">Filtros</span>
+    </div>
+    <div class="row mt-2 g-3">
+      <div class="col-md-3">
+        <label>Tipo de pagamento:</label>
+        <select class="form-control" id="filtro_pgt_tipo">
+          <option value="">Todos</option>
+          <option value="pix">PIX</option>
+          <option value="convenio">Convênio</option>
+          <option value="pos_debito">POS Débito</option>
+          <option value="pos_credito">POS Crédito</option>
+          <option value="pos_pix">POS PIX</option>
+          <option value="dinheiro">Dinheiro</option>
+          <option value="outros">Outros</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label>Status:</label>
+        <select class="form-control" id="filtro_pgt_status">
+          <option value="">Todos</option>
+          <option value="pendente">Pendente</option>
+          <option value="confirmado">Confirmado</option>
+          <option value="cancelado">Cancelado</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label>Data início:</label>
+        <input type="date" class="form-control" id="filtro_pgt_di">
+      </div>
+      <div class="col-md-2">
+        <label>Data fim:</label>
+        <input type="date" class="form-control" id="filtro_pgt_df">
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <table id="tabela-pagamentos" class="display table table-striped" style="width:100%;font-size:14px;">
+    <thead>
+      <tr>
+        <th>Venda</th>
+        <th>Tipo</th>
+        <th>Valor</th>
+        <th>Referência</th>
+        <th>Descrição</th>
+        <th>Status</th>
+        <th>Data</th>
+        <th class="no-export" width="18%">Ações</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>

@@ -1,0 +1,92 @@
+<style>
+  .filtro-box {
+    border: 1px solid rgba(0,123,255,0.2);
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding-top: 2.5rem;
+    position: relative;
+  }
+  .filtro-titulo {
+    position: absolute; top: -1.2rem; left: 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid rgba(0,123,255,0.2);
+    border-radius: 12px; padding: 4px 12px;
+    font-size: 0.95rem; color: #007bff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .badge-venda-aberta     { background: #0d6efd; color: #fff; }
+  .badge-venda-finalizada { background: #198754; color: #fff; }
+  .badge-venda-cancelada  { background: #dc3545; color: #fff; }
+  #modal-itens-venda .table th { background: #f8f9fa; }
+</style>
+
+<div class="container-fluid bg-white p-4 rounded shadow">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="mb-0">
+      <i class="bi bi-cart3"></i> Vendas
+      <button data-submit class="btn btn-outline-secondary" style="border:none;">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </h4>
+    <button data-create class="btn btn-outline-primary">
+      <i class="bi bi-plus"></i> Nova Venda
+    </button>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filtro-box mb-4 p-3 rounded position-relative">
+    <div class="filtro-titulo px-3">
+      <span class="font-weight-bold mb-0">Filtros</span>
+    </div>
+    <div class="row mt-2 g-3">
+      <div class="col-md-2">
+        <label>Status:</label>
+        <select class="form-control" id="filtro_venda_status">
+          <option value="">Todos</option>
+          <option value="aberta">Aberta</option>
+          <option value="finalizada">Finalizada</option>
+          <option value="cancelada">Cancelada</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label>Data início:</label>
+        <input type="date" class="form-control" id="filtro_venda_di">
+      </div>
+      <div class="col-md-2">
+        <label>Data fim:</label>
+        <input type="date" class="form-control" id="filtro_venda_df">
+      </div>
+      <div class="col-md-2">
+        <label>Total:</label>
+        <select class="form-control" id="filtro_venda_total_op">
+          <option value="">Qualquer</option>
+          <option value="gt">Maior que</option>
+          <option value="lt">Menor que</option>
+          <option value="eq">Igual a</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label>&nbsp;</label>
+        <input type="number" class="form-control" id="filtro_venda_total_val" placeholder="Valor" min="0">
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <table id="tabela-vendas" class="display table table-striped" style="width:100%;font-size:14px;">
+    <thead>
+      <tr>
+        <th>Nº Venda</th>
+        <th>Data</th>
+        <th>Usuário</th>
+        <th>Subtotal</th>
+        <th>Desconto</th>
+        <th>Acréscimo</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th class="no-export" width="20%">Ações</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
