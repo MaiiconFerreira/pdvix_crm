@@ -1,0 +1,280 @@
+<!-- dashboard.html -->
+<style>
+.dash-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+@media (max-width: 900px) { .dash-kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .dash-kpi-grid { grid-template-columns: 1fr; } }
+
+.dash-kpi {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.18s;
+}
+.dash-kpi:hover { box-shadow: var(--shadow-md); }
+.dash-kpi-icon {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; flex-shrink: 0;
+}
+.dash-kpi-icon--blue   { background: #dbeafe; color: #1d4ed8; }
+.dash-kpi-icon--green  { background: #dcfce7; color: #16a34a; }
+.dash-kpi-icon--yellow { background: #fef9c3; color: #a16207; }
+.dash-kpi-icon--red    { background: #fee2e2; color: #dc2626; }
+.dash-kpi-icon--purple { background: #ede9fe; color: #7c3aed; }
+.dash-kpi-icon--teal   { background: #ccfbf1; color: #0f766e; }
+.dash-kpi-label  { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--c-text-3); margin-bottom: 4px; }
+.dash-kpi-value  { font-size: 1.45rem; font-weight: 800; color: var(--c-text-1); line-height: 1; }
+.dash-kpi-delta  { font-size: 0.75rem; color: var(--c-text-3); margin-top: 3px; }
+.dash-kpi-delta--up   { color: var(--c-success); }
+.dash-kpi-delta--down { color: var(--c-danger); }
+
+.dash-charts-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+@media (max-width: 860px) { .dash-charts-grid { grid-template-columns: 1fr; } }
+
+.dash-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+@media (max-width: 860px) { .dash-bottom-grid { grid-template-columns: 1fr; } }
+
+.dash-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+.dash-card-header {
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--c-border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.dash-card-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--c-text-2);
+  display: flex; align-items: center; gap: 6px;
+}
+.dash-card-title i { color: var(--c-primary); }
+.dash-card-body { padding: var(--space-md) var(--space-lg); }
+
+.dash-pdv-list { display: flex; flex-direction: column; gap: 8px; }
+.dash-pdv-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  font-size: 13px;
+}
+.dash-pdv-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+}
+.dash-pdv-dot--online  { background: var(--c-success); box-shadow: 0 0 0 3px rgba(22,163,74,.2); }
+.dash-pdv-dot--offline { background: var(--c-text-3); }
+.dash-pdv-name  { font-weight: 600; flex: 1; }
+.dash-pdv-loja  { font-size: 0.72rem; color: var(--c-text-3); }
+.dash-pdv-ping  { font-size: 0.72rem; color: var(--c-text-3); text-align: right; }
+
+.dash-top-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--c-border);
+  font-size: 13px;
+}
+.dash-top-item:last-child { border-bottom: none; }
+.dash-top-rank {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--c-bg-alt, #f1f5f9);
+  border: 1px solid var(--c-border);
+  font-size: 0.7rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-text-2); flex-shrink: 0;
+}
+.dash-top-rank--gold   { background: #fef3c7; border-color: #fbbf24; color: #92400e; }
+.dash-top-rank--silver { background: #f1f5f9; border-color: #94a3b8; color: #475569; }
+.dash-top-rank--bronze { background: #fef0e8; border-color: #f97316; color: #9a3412; }
+.dash-top-name  { flex: 1; font-weight: 500; }
+.dash-top-value { font-weight: 700; color: var(--c-navy); }
+.dash-top-bar-wrap { height: 4px; background: var(--c-border); border-radius: 2px; margin-top: 3px; }
+.dash-top-bar     { height: 4px; background: var(--c-primary); border-radius: 2px; transition: width 0.5s; }
+
+.dash-pgto-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid var(--c-border); font-size: 13px;
+}
+.dash-pgto-item:last-child { border-bottom: none; }
+.dash-pgto-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.dash-pgto-label { flex: 1; }
+.dash-pgto-value { font-weight: 700; }
+.dash-pgto-pct   { font-size: 0.72rem; color: var(--c-text-3); min-width: 36px; text-align: right; }
+
+.dash-filter-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+}
+.dash-filter-row .erp-input,
+.dash-filter-row .erp-select {
+  height: 34px; font-size: 13px; padding: 4px 10px;
+}
+
+.dash-live-dot {
+  display: inline-block; width: 8px; height: 8px;
+  border-radius: 50%; background: var(--c-success);
+  margin-right: 6px; animation: dashPulse 1.8s ease-in-out infinite;
+}
+@keyframes dashPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+</style>
+
+<div class="erp-page">
+
+  <!-- Cabeçalho -->
+  <div class="erp-header">
+    <div class="erp-header-left">
+      <h1 class="erp-page-title">
+        <i class="bi bi-speedometer2"></i>
+        Dashboard
+      </h1>
+      <span class="dash-live-dot" title="Dados em tempo real"></span>
+    </div>
+    <div class="erp-header-actions" style="display:flex; align-items:center; gap:8px;">
+      <div class="dash-filter-row" style="margin-bottom:0;">
+        <div>
+          <input type="date" id="dash-data-inicio" class="erp-input" style="width:140px;">
+        </div>
+        <span style="color:var(--c-text-3); font-size:12px;">até</span>
+        <div>
+          <input type="date" id="dash-data-fim" class="erp-input" style="width:140px;">
+        </div>
+        <button id="btn-dash-filtrar" class="btn-erp btn-erp-primary" style="height:34px;">
+          <i class="bi bi-search"></i>
+        </button>
+        <button id="btn-dash-reload" class="btn-reload" title="Atualizar">
+          <i class="bi bi-arrow-clockwise"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="dash-kpi-grid" id="dash-kpis">
+    <div class="dash-kpi">
+      <div class="dash-kpi-icon dash-kpi-icon--blue"><i class="bi bi-cart-check-fill"></i></div>
+      <div>
+        <div class="dash-kpi-label">Faturamento</div>
+        <div class="dash-kpi-value" id="kpi-faturamento">—</div>
+        <div class="dash-kpi-delta" id="kpi-ticket">—</div>
+      </div>
+    </div>
+    <div class="dash-kpi">
+      <div class="dash-kpi-icon dash-kpi-icon--green"><i class="bi bi-bag-check-fill"></i></div>
+      <div>
+        <div class="dash-kpi-label">Vendas Finalizadas</div>
+        <div class="dash-kpi-value" id="kpi-vendas">—</div>
+        <div class="dash-kpi-delta" id="kpi-ticket-medio">—</div>
+      </div>
+    </div>
+    <div class="dash-kpi">
+      <div class="dash-kpi-icon dash-kpi-icon--red"><i class="bi bi-x-circle-fill"></i></div>
+      <div>
+        <div class="dash-kpi-label">Cancelamentos</div>
+        <div class="dash-kpi-value" id="kpi-canceladas">—</div>
+        <div class="dash-kpi-delta" id="kpi-cancel-pct">—</div>
+      </div>
+    </div>
+    <div class="dash-kpi">
+      <div class="dash-kpi-icon dash-kpi-icon--purple"><i class="bi bi-display-fill"></i></div>
+      <div>
+        <div class="dash-kpi-label">PDVs Online</div>
+        <div class="dash-kpi-value" id="kpi-pdvs-online">—</div>
+        <div class="dash-kpi-delta" id="kpi-pdvs-total">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráficos principais -->
+  <div class="dash-charts-grid">
+
+    <!-- Vendas por hora -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-title"><i class="bi bi-bar-chart-line"></i> Vendas por Hora</div>
+        <div id="dash-vendas-hora-total" style="font-size:12px; color:var(--c-text-3);"></div>
+      </div>
+      <div class="dash-card-body">
+        <canvas id="chart-vendas-hora" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- Formas de pagamento -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-title"><i class="bi bi-pie-chart"></i> Formas de Pagamento</div>
+      </div>
+      <div class="dash-card-body" style="display:flex; flex-direction:column; gap: var(--space-sm);">
+        <canvas id="chart-pagamentos" height="160"></canvas>
+        <div id="dash-pagamentos-legenda" class="dash-pgto-item" style="padding-top:8px;"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom row -->
+  <div class="dash-bottom-grid">
+
+    <!-- Top produtos -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-title"><i class="bi bi-trophy"></i> Top 10 Produtos</div>
+      </div>
+      <div class="dash-card-body" id="dash-top-produtos">
+        <div style="text-align:center; padding:24px; color:var(--c-text-3);">
+          <i class="bi bi-arrow-repeat" style="font-size:1.5rem;"></i>
+          <p style="margin-top:8px; font-size:13px;">Carregando...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status PDVs -->
+    <div class="dash-card">
+      <div class="dash-card-header">
+        <div class="dash-card-title"><i class="bi bi-display"></i> Status dos PDVs</div>
+        <button class="btn-reload" id="btn-reload-pdvs" title="Atualizar PDVs">
+          <i class="bi bi-arrow-clockwise"></i>
+        </button>
+      </div>
+      <div class="dash-card-body">
+        <div id="dash-pdvs-lista" class="dash-pdv-list">
+          <div style="text-align:center; padding:24px; color:var(--c-text-3);">
+            <i class="bi bi-arrow-repeat" style="font-size:1.5rem;"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

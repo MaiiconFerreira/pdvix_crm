@@ -1,0 +1,793 @@
+Workerman[server.php] start in DEBUG mode
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+[INFO] Conectado ao Redis.
+[REDIS] Mensagem: Array
+Workerman[server.php] received signal SIGTERM
+Workerman[server.php] stopping
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+[INFO] Conectado ao Redis.
+[REDIS] Mensagem: {"status":"fila_pagamento","ordem":[{"id":1,"ordem":"2509170535499413","id_prestador":1,"id_usuario_emitiu":1,"status":"emitido","total":"0.10","observacao":null,"data_geracao":"2025-09-17","quando":"2025-09-17 02:35:49"}]}
+[REDIS] Mensagem: {"status":"pendente","ordem":[{"id":1,"ordem":"2509170535499413","id_prestador":1,"id_usuario_emitiu":1,"status":"fila_pagamento","total":"0.10","observacao":null,"data_geracao":"2025-09-17","quando":"2025-09-17 02:35:49"}]}
+Workerman[server.php] received signal SIGTERM
+Workerman[server.php] stopping
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+[INFO] Conectado ao Redis.
+[INFO] Cliente 1 conectado.
+[REDIS] Mensagem: {"status":"fila_pagamento","ordem":[{"id":1,"ordem":"2509170535499413","id_prestador":1,"id_usuario_emitiu":1,"status":"emitido","total":"0.10","observacao":"Duplicidade","data_geracao":"2025-09-17","quando":"2025-09-17 02:35:49"}]}
+[REDIS] Mensagem: {"status":"pendente","ordem":[{"id":1,"ordem":"2509170535499413","id_prestador":1,"id_usuario_emitiu":1,"status":"fila_pagamento","total":"0.10","observacao":"Duplicidade","data_geracao":"2025-09-17","quando":"2025-09-17 02:35:49"}]}
+[REDIS] Mensagem: {"status":"pago","ordem":[{"id":1,"ordem":"2509170535499413","id_prestador":1,"id_usuario_emitiu":1,"status":"pendente","total":"0.10","observacao":"Duplicidade","data_geracao":"2025-09-17","quando":"2025-09-17 02:35:49"}]}
+Workerman[server.php] received signal SIGTERM
+Workerman[server.php] stopping
+[INFO] Cliente 1 desconectado.
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+[INFO] Conectado ao Redis.
+[REDIS] Mensagem: {"status":"pendente","ordem":[{"id":1,"ordem":"2509170535499413","id_prestador":1,"id_usuario_emitiu":1,"status":"fila_pagamento","total":"0.01","observacao":"Duplicidade","data_geracao":"2025-09-17","quando":"2025-09-17 02:35:49"}]}
+[REDIS] Mensagem: {"status":"fila_pagamento","ordem":[{"id":1,"ordem":"2509170535499413","id_prestador":1,"id_usuario_emitiu":1,"status":"emitido","total":"0.01","observacao":"Duplicidade","data_geracao":"2025-09-17","quando":"2025-09-17 02:35:49"}]}
+[REDIS] Mensagem: {"status":"pago","ordem":[{"id":1,"ordem":"2509170535499413","id_prestador":1,"id_usuario_emitiu":1,"status":"pendente","total":"0.01","observacao":"Duplicidade","data_geracao":"2025-09-17","quando":"2025-09-17 02:35:49"}]}
+[INFO] Cliente 1 conectado.
+[REDIS] Mensagem: {"status":"falha","ordem":[{"id":1,"ordem":"2509170535499413","id_prestador":1,"id_usuario_emitiu":1,"status":"emitido","total":"0.02","observacao":"Duplicidade","data_geracao":"2025-09-17","quando":"2025-09-17 02:35:49"}]}
+[INFO] Cliente 1 desconectado.
+Workerman[server.php] received signal SIGTERM
+RedisException: read error on connection to 127.0.0.1:6379 in /var/www/html/websocket/server.php:51
+Stack trace:
+#0 /var/www/html/websocket/server.php(51): Redis->rPop()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Events/Select.php(483): {closure:{closure:/var/www/html/websocket/server.php:44}:50}()
+#2 /var/www/html/websocket/vendor/workerman/workerman/src/Events/Select.php(340): Workerman\Events\Select->safeCall()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Events/Select.php(426): Workerman\Events\Select->tick()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1751): Workerman\Events\Select->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(594): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#9 {main}
+Workerman[server.php] stopping
+RedisException: Redis server 127.0.0.1:6379 went away in /var/www/html/websocket/server.php:51
+Stack trace:
+#0 /var/www/html/websocket/server.php(51): Redis->rPop()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Events/Select.php(483): {closure:{closure:/var/www/html/websocket/server.php:44}:50}()
+#2 /var/www/html/websocket/vendor/workerman/workerman/src/Events/Select.php(340): Workerman\Events\Select->safeCall()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Events/Select.php(426): Workerman\Events\Select->tick()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1751): Workerman\Events\Select->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(594): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#9 {main}
+worker[none:36264] exit with status 64000
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(594): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#9 {main}
+worker[none:904] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1242] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1253] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1264] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1275] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1288] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1303] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1315] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1326] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1552] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1565] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1578] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1589] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1600] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1611] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1895] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:1943] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:2094] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:2158] exit with status 64000
+Workerman[server.php] received signal SIGTERM
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+Workerman[server.php] stopping
+worker[none:2586] exit with status 64000
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(594): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#9 {main}
+worker[none:2852] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:2877] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:2918] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:3074] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:3100] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:3122] exit with status 64000
+Workerman[server.php] received signal SIGTERM
+Workerman[server.php] stopping
+worker[none:3139] exit with status 9
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(594): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#9 {main}
+worker[none:3181] exit with status 64000
+Workerman[server.php] start in DEBUG mode
+Master pid:3180 is not alive
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+Workerman[server.php] received signal SIGTERM
+Workerman[server.php] stopping
+worker[none:3230] exit with status 9
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(594): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#9 {main}
+worker[none:3255] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:3275] exit with status 64000
+Workerman[server.php] received signal SIGTERM
+Workerman[server.php] stopping
+worker[none:3296] exit with status 9
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(594): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#9 {main}
+worker[none:3332] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:3545] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:3764] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:3784] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:3796] exit with status 64000
+Workerman[server.php] received signal SIGTERM
+Workerman[server.php] stopping
+worker[none:3809] exit with status 9
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(594): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#9 {main}
+worker[none:3943] exit with status 64000
+Workerman[server.php] received signal SIGTERM
+Workerman[server.php] stopping
+worker[none:3967] exit with status 9
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(594): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#9 {main}
+worker[none:4376] exit with status 64000
+Workerman[server.php] received signal SIGTERM
+Workerman[server.php] stopping
+worker[none:4406] exit with status 9
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+----------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+------------------------------------------------ WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                      count       state            
+select      ssl         root        none        websocket://0.0.0.0:444/    1            [OK]            
+---------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(594): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#9 {main}
+worker[none:4621] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:4637] exit with status 64000
+Workerman[server.php] received signal SIGTERM
+Workerman[server.php] stopping
+worker[none:4666] exit with status 9
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+----------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+------------------------------------------------ WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                      count       state            
+select      ssl         root        none        websocket://0.0.0.0:444/    1            [OK]            
+---------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+Workerman[server.php] received signal SIGTERM
+Workerman[server.php] stopping
+worker[none:4708] exit with status 9
+Workerman[server.php] has been stopped
+Workerman[server.php] start in DEBUG mode
+---------------------------------------------- WORKERMAN -----------------------------------------------
+Workerman/5.1.3         PHP/8.4.12 (JIT off)          Linux/5.15.0-153-generic
+----------------------------------------------- WORKERS ------------------------------------------------
+event-loop  proto       user        worker      listen                     count       state            
+select      ssl         root        none        websocket://0.0.0.0:444    1            [OK]            
+--------------------------------------------------------------------------------------------------------
+Press Ctrl+C to stop. Start success.
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(594): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#9 {main}
+worker[none:4914] exit with status 64000
+RedisException: Connection timed out in /var/www/html/websocket/server.php:46
+Stack trace:
+#0 /var/www/html/websocket/server.php(46): Redis->connect()
+#1 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2577): {closure:/var/www/html/websocket/server.php:44}()
+#2 [internal function]: Workerman\Worker->{closure:Workerman\Worker::run():2575}()
+#3 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(2594): Fiber->start()
+#4 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1749): Workerman\Worker->run()
+#5 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1546): Workerman\Worker::forkOneWorkerForLinux()
+#6 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1526): Workerman\Worker::forkWorkersForLinux()
+#7 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1894): Workerman\Worker::forkWorkers()
+#8 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(1831): Workerman\Worker::monitorWorkersForLinux()
+#9 /var/www/html/websocket/vendor/workerman/workerman/src/Worker.php(596): Workerman\Worker::monitorWorkers()
+#10 /var/www/html/websocket/server.php(64): Workerman\Worker::runAll()
+#11 {main}
+worker[none:4936] exit with status 64000

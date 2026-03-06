@@ -1,0 +1,13 @@
+{
+	"autoload": {
+		"psr-4": {
+			"App\\": "App/"
+		}
+	},
+	"require": {
+		"orhanerday/open-ai": "^5.3",
+		"workerman/workerman": "^5.1",
+		"mpdf/mpdf": "^8.2",
+		"guzzlehttp/guzzle": "^7.10"
+	}
+}

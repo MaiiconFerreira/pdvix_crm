@@ -2,12 +2,23 @@
 namespace App\Core;
 
 use App\Models\UserModel;
+use App\Core\Database;
 
-class Controller {
-
+/**
+ * Controller base — PDVix
+ *
+ * Centraliza:
+ *  - Gestão de sessão PHP (painel admin)
+ *  - Validação de token PDV (Electron)
+ *  - requirePerfil() — elimina duplicação nos controllers filhos
+ *  - Helpers de entrada/saída HTTP
+ */
+class Controller
+{
     // ── Sessão ────────────────────────────────────────────────────────────────
 
-    public function existsSession(): bool {
+    public function existsSession(): bool
+    {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -16,7 +27,6 @@ class Controller {
             return false;
         }
 
-        // Valida fingerprint (UA + IP)
         $currentFingerprint = hash('sha256',
             $_SERVER['HTTP_USER_AGENT'] . '|' . $this->getUserIP()
         );
@@ -27,7 +37,6 @@ class Controller {
             return false;
         }
 
-        // Timeout de 60 minutos
         if (time() - $_SESSION['last_activity'] > 3600) {
             session_unset();
             session_destroy();
@@ -38,12 +47,12 @@ class Controller {
         return true;
     }
 
-    protected function ensureSession(): void {
+    protected function ensureSession(): void
+    {
         if (!$this->existsSession()) {
             $this->responseJson('error', [], 'Sessão inválida ou expirada!', 403);
         }
 
-        // Verifica se o usuário ainda está ativo no banco
         $userModel = new UserModel();
         $userData  = $userModel->findById((int) $_SESSION['logado']->id, ['id', 'status']);
 
@@ -54,16 +63,86 @@ class Controller {
         }
     }
 
-    public function requireLoginRedirect(): void {
+    public function requireLoginRedirect(): void
+    {
         if (!$this->existsSession()) {
             header('Location: /login');
             exit;
         }
     }
 
+    // ── Autorização por perfil (centralizado — sem duplicar nos controllers) ──
+
+    /**
+     * Encerra a requisição com 403 se o perfil do usuário logado não for permitido.
+     * Deve ser chamado após ensureSession().
+     *
+     * @param string[] $perfisPermitidos Ex: ['administrador', 'gerente']
+     */
+    protected function requirePerfil(array $perfisPermitidos): void
+    {
+        $perfilLogado = $_SESSION['logado']->perfil ?? '';
+        if (!in_array($perfilLogado, $perfisPermitidos, true)) {
+            $this->responseJson('error', [], 'Sem permissão para executar esta ação.', 403);
+        }
+    }
+
+    // ── Token PDV (Electron) ──────────────────────────────────────────────────
+
+    /**
+     * Valida o token estático do PDV contra config.api_token.
+     * Encerra com 401 se inválido.
+     * Deve ser chamado nos endpoints que usam auth por token (sem sessão PHP).
+     */
+    protected function validarTokenPdv(): void
+    {
+        $token = trim($_GET['token'] ?? '');
+
+        $pdo  = Database::getConnection();
+        $stmt = $pdo->prepare("SELECT valor FROM config WHERE chave = 'api_token' LIMIT 1");
+        $stmt->execute();
+        $row = $stmt->fetch(\PDO::FETCH_OBJ);
+
+        if (!$row || empty($row->valor) || !hash_equals($row->valor, $token)) {
+            $this->responseJson('error', [], 'Token inválido ou ausente.', 401);
+        }
+    }
+
+    // ── Contexto de loja do usuário logado ────────────────────────────────────
+
+    /**
+     * Retorna o loja_id da sessão (quando multi-loja estiver ativo).
+     * Administradores podem passar ?loja_id=X para filtrar uma loja específica.
+     * Gerentes e operadores ficam restritos à sua própria loja.
+     *
+     * Retorna null enquanto a coluna loja_id ainda não existir (pré-migration).
+     */
+    protected function getLojaIdSessao(): ?int
+    {
+        if (!isset($_SESSION['logado'])) {
+            return null;
+        }
+
+        $user  = $_SESSION['logado'];
+        $perfil = $user->perfil ?? '';
+
+        // Admins podem filtrar qualquer loja via query param
+        if ($perfil === 'administrador' && !empty($_GET['loja_id'])) {
+            return (int) $_GET['loja_id'];
+        }
+
+        // Usuário tem loja vinculada na sessão (após migration v3)
+        if (!empty($user->loja_id)) {
+            return (int) $user->loja_id;
+        }
+
+        return null;
+    }
+
     // ── CORS / Headers ────────────────────────────────────────────────────────
 
-    protected function jsonHeader(): void {
+    protected function jsonHeader(): void
+    {
         header('Content-type: application/json');
 
         if (!isset($_SERVER['HTTP_ORIGIN'])) {
@@ -80,14 +159,16 @@ class Controller {
 
     // ── Views ─────────────────────────────────────────────────────────────────
 
-    public function view(string $view, array $data = []): void {
+    public function view(string $view, array $data = []): void
+    {
         extract($data);
         require "../App/Views/{$view}.php";
     }
 
     // ── Entrada ───────────────────────────────────────────────────────────────
 
-    protected function getRequestData(array $requiredFields, array $optionalFields = [], $callback = null, $data_callback = null): array {
+    protected function getRequestData(array $requiredFields, array $optionalFields = [], $callback = null, $data_callback = null): array
+    {
         $data      = $this->isRequestType($_SERVER['CONTENT_TYPE'] ?? '');
         $validated = $this->validarInputs($requiredFields, $data, $callback, $data_callback);
 
@@ -98,7 +179,8 @@ class Controller {
         return $validated;
     }
 
-    protected function validarInputs(array $campos, $INPUT = null, $callback = null, $data_callback = null): array {
+    protected function validarInputs(array $campos, $INPUT = null, $callback = null, $data_callback = null): array
+    {
         if (is_null($INPUT)) {
             $INPUT = $_POST;
         }
@@ -128,7 +210,8 @@ class Controller {
         return $dados;
     }
 
-    protected function validarInputsGet(array $requiredFields, array $optionalFields = []): array {
+    protected function validarInputsGet(array $requiredFields, array $optionalFields = []): array
+    {
         $dados = [];
 
         foreach ($requiredFields as $campo) {
@@ -147,7 +230,8 @@ class Controller {
 
     // ── Saída JSON ────────────────────────────────────────────────────────────
 
-    protected function responseJson(string $status, $data = null, string $mensagem = '', int $httpCode = 200): void {
+    protected function responseJson(string $status, $data = null, string $mensagem = '', int $httpCode = 200): void
+    {
         header('Content-Type: application/json');
         http_response_code($httpCode);
         echo json_encode([
@@ -160,7 +244,8 @@ class Controller {
 
     // ── Utilitários ───────────────────────────────────────────────────────────
 
-    public function getUserIP(): string {
+    public function getUserIP(): string
+    {
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             return $_SERVER['HTTP_CLIENT_IP'];
         }
@@ -170,28 +255,33 @@ class Controller {
         return $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
     }
 
-    protected function ensureMethod(string $method): void {
+    protected function ensureMethod(string $method): void
+    {
         if (!$this->isRequestMethod($method)) {
             $this->responseJson('error', [], 'Método não aceito!', 405);
         }
     }
 
-    protected function compararSenha(string $senhaExterna, string $senhaInterna): bool {
+    protected function compararSenha(string $senhaExterna, string $senhaInterna): bool
+    {
         return password_verify($senhaExterna, $senhaInterna);
     }
 
-    protected function isRequestType(string $contentType): array {
+    protected function isRequestType(string $contentType): array
+    {
         if (stripos($contentType, 'application/json') !== false) {
             return json_decode(file_get_contents('php://input'), true) ?? [];
         }
         return $_POST;
     }
 
-    protected function isRequestMethod(string $type): bool {
+    protected function isRequestMethod(string $type): bool
+    {
         return strtoupper($_SERVER['REQUEST_METHOD']) === strtoupper($type);
     }
 
-    public function timeAgo(string $datetime, bool $full = false): string {
+    public function timeAgo(string $datetime, bool $full = false): string
+    {
         $now  = new \DateTime();
         $ago  = new \DateTime($datetime);
         $diff = $now->diff($ago);
@@ -216,7 +306,8 @@ class Controller {
         return $string ? 'há ' . implode(', ', $string) : 'agora mesmo';
     }
 
-    public function isBase64(string $string): bool {
+    public function isBase64(string $string): bool
+    {
         if (preg_match('/^data:\w+\/[a-zA-Z+\-.]+;base64,/', $string)) {
             $string = substr($string, strpos($string, ',') + 1);
         }

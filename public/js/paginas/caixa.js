@@ -44,7 +44,7 @@ let tabela;
 function initTabela() {
   tabela = $('#tabela-caixas').DataTable({
     processing: true, serverSide: true, pageLength: 25, order: [[3, 'desc']],
-    language: { url: '/assets/plugins/datatables/pt-BR.json' },
+    language: { url: '/template/datatables_pt-BR.json' },
     ajax: {
       url: '/api/pdv/caixas', type: 'GET',
       data: function (d) {

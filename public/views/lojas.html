@@ -1,0 +1,100 @@
+<!-- lojas.html -->
+<style>
+.lojas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+.loja-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.loja-card:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.loja-card-header {
+  background: var(--c-navy);
+  color: #fff;
+  padding: var(--space-md) var(--space-lg);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.loja-card-name { font-weight: 700; font-size: 15px; }
+.loja-card-cnpj { font-size: 0.72rem; opacity: 0.7; margin-top: 2px; font-family: monospace; }
+.loja-card-body { padding: var(--space-md) var(--space-lg); }
+.loja-info-row  {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 13px; color: var(--c-text-2); margin-bottom: 6px;
+}
+.loja-info-row i { color: var(--c-text-3); margin-top: 2px; font-size: 13px; flex-shrink: 0; }
+.loja-card-footer {
+  padding: var(--space-sm) var(--space-lg);
+  border-top: 1px solid var(--c-border);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--c-bg);
+}
+.loja-pdv-count { font-size: 12px; color: var(--c-text-3); }
+
+.pdv-table-wrap { margin-top: var(--space-lg); }
+</style>
+
+<div class="erp-page">
+
+  <!-- Cabeçalho -->
+  <div class="erp-header">
+    <div class="erp-header-left">
+      <h1 class="erp-page-title">
+        <i class="bi bi-shop"></i>
+        Lojas & PDVs
+      </h1>
+      <button id="btn-reload-lojas" class="btn-reload" title="Recarregar">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </div>
+    <div class="erp-header-actions">
+      <button id="btn-criar-pdv" class="btn-erp btn-erp-secondary">
+        <i class="bi bi-display"></i> Cadastrar PDV
+      </button>
+      <button id="btn-criar-loja" class="btn-erp btn-erp-primary">
+        <i class="bi bi-plus-lg"></i> Nova Loja
+      </button>
+    </div>
+  </div>
+
+  <!-- Cards de lojas -->
+  <div id="lojas-grid-container">
+    <div style="text-align:center; padding:48px; color:var(--c-text-3);">
+      <i class="bi bi-shop" style="font-size:2rem; opacity:0.3;"></i>
+      <p style="margin-top:12px; font-size:13px;">Carregando lojas...</p>
+    </div>
+  </div>
+
+  <!-- Tabela de PDVs -->
+  <div class="pdv-table-wrap">
+    <div class="erp-header" style="margin-bottom: var(--space-md);">
+      <div class="erp-header-left">
+        <h2 style="font-size:15px; font-weight:700; color:var(--c-text-1); display:flex; align-items:center; gap:8px;">
+          <i class="bi bi-display" style="color:var(--c-primary);"></i> PDVs Cadastrados
+        </h2>
+      </div>
+    </div>
+    <div class="erp-table-wrapper">
+      <table id="tabela-pdvs" class="erp-table display" style="width:100%">
+        <thead>
+          <tr>
+            <th>Nº PDV</th>
+            <th>Loja</th>
+            <th>Descrição</th>
+            <th>URL Local</th>
+            <th>Status</th>
+            <th class="no-export">Ações</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

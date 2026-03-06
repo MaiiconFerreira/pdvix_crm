@@ -17,6 +17,24 @@ define('PATH_LOGS', ($prod) ? '/var/www/html/logs/' : 'C:/xampp/pdvix_crm/logs/'
 
 date_default_timezone_set('America/Cuiaba');
 
+// ── Pagar.me ─────────────────────────────────────────────────────────────────
+// Substitua pelos valores reais do dashboard Pagar.me v5
+define('PAGARME_API_KEY',       'sk_7b77b2c61c0a443ea83bca26744ed8cb');
+define('PAGARME_WEBHOOK_SECRET', getenv('PAGARME_WEBHOOK_SECRET') ?: 'whsec_COLOQUE_SEU_SECRET_AQUI');
+
+// ── PDV Electron ──────────────────────────────────────────────────────────────
+// Token estático compartilhado com o PDV Electron para autenticação das rotas /api/pdv/sync-*
+// Gere um UUID v4 e salve também na tabela config (chave = 'api_token')
+define('PDV_API_TOKEN', getenv('PDV_API_TOKEN') ?: 'COLOQUE_UM_TOKEN_SEGURO_AQUI');
+
+// ── Redis ─────────────────────────────────────────────────────────────────────
+define('REDIS_HOST', getenv('REDIS_HOST') ?: '127.0.0.1');
+define('REDIS_PORT', (int)(getenv('REDIS_PORT') ?: 6379));
+
+// ── WebSocket (Workerman) ────────────────────────────────────────────────────
+define('WS_PORT', (int)(getenv('WS_PORT') ?: 8080));
+
+
 
 // LOCK GLOBAL (1 PROCESSO POR WORKER)
 function acquireLock($name) {

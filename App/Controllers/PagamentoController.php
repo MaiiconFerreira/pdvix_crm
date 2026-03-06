@@ -161,15 +161,4 @@ class PagamentoController extends Controller
         );
     }
 
-    // =========================================================================
-    // HELPER
-    // =========================================================================
-
-    private function requirePerfil(array $perfisPermitidos): void
-    {
-        $perfilLogado = $_SESSION['logado']->perfil ?? '';
-        if (!in_array($perfilLogado, $perfisPermitidos, true)) {
-            $this->responseJson('error', [], 'Sem permissão para executar esta ação.', 403);
-        }
     }
-}

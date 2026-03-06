@@ -1,0 +1,105 @@
+<!-- cancelamentos.html -->
+<style>
+.badge-cancelamento-venda { background: #fee2e2; color: #dc2626; }
+.badge-cancelamento-item  { background: #fef3c7; color: #92400e; }
+.badge-origem-pdv         { background: #eff6ff; color: #1d4ed8; }
+.badge-origem-painel      { background: #f0fdf4; color: #15803d; }
+</style>
+
+<div class="erp-page">
+
+  <!-- Cabeçalho -->
+  <div class="erp-header">
+    <div class="erp-header-left">
+      <h1 class="erp-page-title">
+        <i class="bi bi-x-circle"></i>
+        Cancelamentos
+      </h1>
+      <button data-submit class="btn-reload" title="Recarregar">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </div>
+    <div class="erp-header-actions">
+      <button id="btn-cancelar-venda" class="btn-erp btn-erp-danger">
+        <i class="bi bi-x-lg"></i> Cancelar Venda
+      </button>
+    </div>
+  </div>
+
+  <!-- Cards resumo -->
+  <div class="erp-cards">
+    <div class="erp-card erp-card--danger">
+      <div class="erp-card-icon"><i class="bi bi-x-circle-fill"></i></div>
+      <div class="erp-card-value" id="card-cancel-total">—</div>
+      <div class="erp-card-label">Total Cancelados</div>
+    </div>
+    <div class="erp-card erp-card--warning">
+      <div class="erp-card-icon"><i class="bi bi-bag-x"></i></div>
+      <div class="erp-card-value" id="card-cancel-vendas">—</div>
+      <div class="erp-card-label">Vendas Canceladas</div>
+    </div>
+    <div class="erp-card erp-card--primary">
+      <div class="erp-card-icon"><i class="bi bi-box-seam"></i></div>
+      <div class="erp-card-value" id="card-cancel-itens">—</div>
+      <div class="erp-card-label">Itens Cancelados</div>
+    </div>
+    <div class="erp-card erp-card--success">
+      <div class="erp-card-icon"><i class="bi bi-currency-dollar"></i></div>
+      <div class="erp-card-value" id="card-cancel-valor">—</div>
+      <div class="erp-card-label">Valor Cancelado</div>
+    </div>
+  </div>
+
+  <!-- Filtros -->
+  <div class="erp-filters">
+    <div class="erp-filters-header">
+      <i class="bi bi-funnel"></i> Filtros
+    </div>
+    <div class="erp-filters-grid">
+      <div>
+        <label class="erp-label" for="filtro-cancel-tipo">Tipo</label>
+        <select class="erp-select" id="filtro-cancel-tipo">
+          <option value="">Todos</option>
+          <option value="venda">Venda inteira</option>
+          <option value="item">Item</option>
+        </select>
+      </div>
+      <div>
+        <label class="erp-label" for="filtro-cancel-di">Data início</label>
+        <input type="date" class="erp-input" id="filtro-cancel-di">
+      </div>
+      <div>
+        <label class="erp-label" for="filtro-cancel-df">Data fim</label>
+        <input type="date" class="erp-input" id="filtro-cancel-df">
+      </div>
+      <div style="display:flex; align-items:flex-end; gap:8px;">
+        <button id="btn-cancel-filtrar" class="btn-erp btn-erp-primary" style="flex:1;">
+          <i class="bi bi-search"></i> Filtrar
+        </button>
+        <button id="btn-cancel-limpar" class="btn-erp btn-erp-secondary">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <div class="erp-table-wrapper">
+    <table id="tabela-cancelamentos" class="erp-table display" style="width:100%">
+      <thead>
+        <tr>
+          <th>Tipo</th>
+          <th>Nº Venda</th>
+          <th>Operador</th>
+          <th>PDV</th>
+          <th>Valor</th>
+          <th>Motivo</th>
+          <th>Origem</th>
+          <th>Data/Hora</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+</div>

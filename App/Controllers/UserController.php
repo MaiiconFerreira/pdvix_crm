@@ -199,17 +199,4 @@ class UserController extends Controller {
         $this->responseJson('success', ['status' => $novoStatus], "Usuário {$label} com sucesso!");
     }
 
-    // =========================================================================
-    // HELPER PRIVADO — verificação de perfil
-    // =========================================================================
-
-    /**
-     * Encerra a requisição com 403 se o usuário logado não tiver um dos perfis exigidos.
-     */
-    private function requirePerfil(array $perfisPermitidos): void {
-        $perfilLogado = $_SESSION['logado']->perfil ?? '';
-        if (!in_array($perfilLogado, $perfisPermitidos, true)) {
-            $this->responseJson('error', [], 'Sem permissão para executar esta ação.', 403);
-        }
     }
-}

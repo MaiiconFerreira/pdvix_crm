@@ -1,4 +1,4 @@
-<!-- vendas.html — refatorado -->
+<!-- vendas.html — refatorado v3 (multi-loja, btn-act design system) -->
 
 <div class="erp-page">
 
@@ -36,6 +36,10 @@
         </select>
       </div>
       <div>
+        <label class="erp-label" for="filtro_venda_numero_pdv">PDV</label>
+        <input type="text" class="erp-input" id="filtro_venda_numero_pdv" placeholder="Ex: 01">
+      </div>
+      <div>
         <label class="erp-label" for="filtro_venda_di">Data início</label>
         <input type="date" class="erp-input" id="filtro_venda_di">
       </div>
@@ -66,10 +70,10 @@
         <tr>
           <th>Nº Venda</th>
           <th>Data</th>
-          <th>Usuário</th>
+          <th>Operador</th>
+          <th>PDV</th>
           <th>Subtotal</th>
           <th>Desconto</th>
-          <th>Acréscimo</th>
           <th>Total</th>
           <th>Status</th>
           <th class="no-export">Ações</th>

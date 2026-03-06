@@ -83,6 +83,8 @@ body {
 .erp-page {
   padding: var(--space-lg);
   max-width: 1600px;
+  padding-top: 0;
+    margin-top: 0;
 }
 
 /* ── Page Header ─────────────────────────────────────────────── */
@@ -337,9 +339,10 @@ body {
 .erp-table-wrapper {
   background: var(--c-surface);
   border: 1px solid var(--c-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
   overflow: hidden;
+  padding: 1%;
 }
 
 /* Override DataTables */

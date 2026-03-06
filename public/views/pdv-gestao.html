@@ -1,0 +1,146 @@
+<!-- pdv-gestao.html -->
+<style>
+.pdvg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.pdvg-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+  position: relative;
+}
+.pdvg-card:hover { box-shadow: var(--shadow-md); }
+
+.pdvg-card--online  { border-top: 3px solid var(--c-success); }
+.pdvg-card--offline { border-top: 3px solid var(--c-border); }
+
+.pdvg-card-header {
+  padding: var(--space-md) var(--space-lg);
+  display: flex; align-items: center; gap: 12px;
+}
+.pdvg-status-dot {
+  width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+}
+.pdvg-status-dot--online  { background: var(--c-success); box-shadow: 0 0 0 3px rgba(22,163,74,.15); }
+.pdvg-status-dot--offline { background: var(--c-text-3); }
+
+.pdvg-pdv-num   { font-size: 1.1rem; font-weight: 800; color: var(--c-text-1); }
+.pdvg-loja-name { font-size: 0.72rem; color: var(--c-text-3); margin-top: 1px; }
+
+.pdvg-card-body {
+  padding: 0 var(--space-lg) var(--space-md);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.pdvg-info-row { display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+.pdvg-info-label { color: var(--c-text-3); }
+.pdvg-info-value { font-weight: 600; color: var(--c-text-2); }
+
+.pdvg-card-footer {
+  padding: var(--space-sm) var(--space-lg);
+  border-top: 1px solid var(--c-border);
+  background: var(--c-bg);
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+
+.pdvg-cmd-btn {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: var(--radius-md);
+  font-size: 11px; font-weight: 600;
+  border: 1px solid; cursor: pointer;
+  transition: all 0.15s;
+  background: var(--c-surface);
+}
+.pdvg-cmd-btn:hover { filter: brightness(0.93); }
+.pdvg-cmd-btn--blue   { border-color: #93c5fd; color: #1d4ed8; background: #eff6ff; }
+.pdvg-cmd-btn--green  { border-color: #86efac; color: #15803d; background: #f0fdf4; }
+.pdvg-cmd-btn--yellow { border-color: #fde68a; color: #92400e; background: #fffbeb; }
+.pdvg-cmd-btn--red    { border-color: #fca5a5; color: #dc2626; background: #fef2f2; }
+.pdvg-cmd-btn--gray   { border-color: var(--c-border); color: var(--c-text-2); }
+.pdvg-cmd-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.pdvg-log {
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+}
+.pdvg-log-title {
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.6px; color: var(--c-text-3);
+  margin-bottom: var(--space-md);
+  display: flex; align-items: center; gap: 6px;
+}
+.pdvg-log-title i { color: var(--c-primary); }
+.pdvg-log-list { display: flex; flex-direction: column; gap: 6px; max-height: 220px; overflow-y: auto; }
+.pdvg-log-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 12px; padding: 6px 10px;
+  border-radius: var(--radius-md);
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+}
+.pdvg-log-time  { color: var(--c-text-3); flex-shrink: 0; min-width: 65px; }
+.pdvg-log-pdv   { color: var(--c-primary); font-weight: 700; flex-shrink: 0; min-width: 60px; }
+.pdvg-log-msg   { flex: 1; }
+</style>
+
+<div class="erp-page">
+
+  <!-- Cabeçalho -->
+  <div class="erp-header">
+    <div class="erp-header-left">
+      <h1 class="erp-page-title">
+        <i class="bi bi-display"></i>
+        Gestão de PDVs
+      </h1>
+      <button id="btn-reload-pdvg" class="btn-reload" title="Recarregar">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </div>
+    <div class="erp-header-actions">
+      <button id="btn-pdvg-carga-todos" class="btn-erp btn-erp-secondary">
+        <i class="bi bi-cloud-download"></i> Enviar Carga para Todos
+      </button>
+    </div>
+  </div>
+
+  <!-- Filtro de loja (admins veem todas) -->
+  <div class="erp-filters" style="margin-bottom: var(--space-md);">
+    <div class="erp-filters-grid" style="grid-template-columns: 240px auto;">
+      <div>
+        <label class="erp-label" for="pdvg-filtro-loja">Loja</label>
+        <select id="pdvg-filtro-loja" class="erp-select">
+          <option value="">Todas as lojas</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid de PDVs -->
+  <div id="pdvg-grid" class="pdvg-grid">
+    <div style="grid-column:1/-1; text-align:center; padding:48px; color:var(--c-text-3);">
+      <i class="bi bi-display" style="font-size:2rem; opacity:0.3;"></i>
+      <p style="margin-top:12px; font-size:13px;">Carregando PDVs...</p>
+    </div>
+  </div>
+
+  <!-- Log de ações enviadas (lado cliente) -->
+  <div class="pdvg-log" id="pdvg-log-container">
+    <div class="pdvg-log-title">
+      <i class="bi bi-terminal"></i> Log de Comandos Enviados
+    </div>
+    <div class="pdvg-log-list" id="pdvg-log-list">
+      <div style="text-align:center; color:var(--c-text-3); font-size:12px; padding:16px;">
+        Nenhum comando enviado nesta sessão.
+      </div>
+    </div>
+  </div>
+
+</div>

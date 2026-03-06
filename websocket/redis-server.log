@@ -1,0 +1,622 @@
+8017:C 16 Sep 2025 11:25:08.777 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+8017:C 16 Sep 2025 11:25:08.778 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+8017:C 16 Sep 2025 11:25:08.778 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=8017, just started
+8017:C 16 Sep 2025 11:25:08.778 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 8017
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+8017:M 16 Sep 2025 11:25:08.780 # Server initialized
+8017:M 16 Sep 2025 11:25:08.780 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+8017:M 16 Sep 2025 11:25:08.780 * Ready to accept connections
+8017:M 16 Sep 2025 11:58:02.405 * 1 changes in 900 seconds. Saving...
+8017:M 16 Sep 2025 11:58:02.409 * Background saving started by pid 12027
+12027:C 16 Sep 2025 11:58:02.415 * DB saved on disk
+12027:C 16 Sep 2025 11:58:02.416 * RDB: 0 MB of memory used by copy-on-write
+8017:M 16 Sep 2025 11:58:02.510 * Background saving terminated with success
+8017:M 16 Sep 2025 13:55:54.502 * 1 changes in 900 seconds. Saving...
+8017:M 16 Sep 2025 13:55:54.507 * Background saving started by pid 22044
+22044:C 16 Sep 2025 13:55:54.524 * DB saved on disk
+22044:C 16 Sep 2025 13:55:54.525 * RDB: 0 MB of memory used by copy-on-write
+8017:M 16 Sep 2025 13:55:54.607 * Background saving terminated with success
+8017:M 16 Sep 2025 13:56:55.097 * 10000 changes in 60 seconds. Saving...
+8017:M 16 Sep 2025 13:56:55.098 * Background saving started by pid 22081
+22081:C 16 Sep 2025 13:56:55.102 * DB saved on disk
+22081:C 16 Sep 2025 13:56:55.103 * RDB: 0 MB of memory used by copy-on-write
+8017:M 16 Sep 2025 13:56:55.198 * Background saving terminated with success
+8017:M 16 Sep 2025 13:57:56.041 * 10000 changes in 60 seconds. Saving...
+8017:M 16 Sep 2025 13:57:56.045 * Background saving started by pid 22519
+22519:C 16 Sep 2025 13:57:56.093 * DB saved on disk
+22519:C 16 Sep 2025 13:57:56.094 * RDB: 0 MB of memory used by copy-on-write
+8017:M 16 Sep 2025 13:57:56.146 * Background saving terminated with success
+8017:signal-handler (1758042214) Received SIGTERM scheduling shutdown...
+8017:M 16 Sep 2025 14:03:34.301 # User requested shutdown...
+8017:M 16 Sep 2025 14:03:34.332 * Saving the final RDB snapshot before exiting.
+8017:M 16 Sep 2025 14:03:34.553 * DB saved on disk
+8017:M 16 Sep 2025 14:03:34.553 * Removing the pid file.
+8017:M 16 Sep 2025 14:03:34.553 # Redis is now ready to exit, bye bye...
+740:C 16 Sep 2025 14:11:23.390 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+740:C 16 Sep 2025 14:11:23.406 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+740:C 16 Sep 2025 14:11:23.406 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=740, just started
+740:C 16 Sep 2025 14:11:23.406 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 740
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+740:M 16 Sep 2025 14:11:23.518 # Server initialized
+740:M 16 Sep 2025 14:11:23.519 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+740:M 16 Sep 2025 14:11:23.578 * Loading RDB produced by version 6.0.16
+740:M 16 Sep 2025 14:11:23.578 * RDB age 469 seconds
+740:M 16 Sep 2025 14:11:23.578 * RDB memory usage when created 0.77 Mb
+740:M 16 Sep 2025 14:11:23.578 * DB loaded from disk: 0.059 seconds
+740:M 16 Sep 2025 14:11:23.578 * Ready to accept connections
+740:signal-handler (1758086592) Received SIGTERM scheduling shutdown...
+740:M 17 Sep 2025 02:23:12.309 # User requested shutdown...
+740:M 17 Sep 2025 02:23:12.333 * Saving the final RDB snapshot before exiting.
+740:M 17 Sep 2025 02:23:12.375 * DB saved on disk
+740:M 17 Sep 2025 02:23:12.375 * Removing the pid file.
+740:M 17 Sep 2025 02:23:12.375 # Redis is now ready to exit, bye bye...
+727:C 17 Sep 2025 02:30:42.375 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+727:C 17 Sep 2025 02:30:42.378 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+727:C 17 Sep 2025 02:30:42.378 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=727, just started
+727:C 17 Sep 2025 02:30:42.378 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 727
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+727:M 17 Sep 2025 02:30:42.424 # Server initialized
+727:M 17 Sep 2025 02:30:42.424 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+727:M 17 Sep 2025 02:30:42.431 * Loading RDB produced by version 6.0.16
+727:M 17 Sep 2025 02:30:42.432 * RDB age 450 seconds
+727:M 17 Sep 2025 02:30:42.432 * RDB memory usage when created 0.86 Mb
+727:M 17 Sep 2025 02:30:42.432 * DB loaded from disk: 0.007 seconds
+727:M 17 Sep 2025 02:30:42.432 * Ready to accept connections
+727:M 17 Sep 2025 03:14:59.324 * 1 changes in 900 seconds. Saving...
+727:M 17 Sep 2025 03:14:59.335 * Background saving started by pid 6350
+6350:C 17 Sep 2025 03:14:59.374 * DB saved on disk
+6350:C 17 Sep 2025 03:14:59.375 * RDB: 0 MB of memory used by copy-on-write
+727:M 17 Sep 2025 03:14:59.436 * Background saving terminated with success
+727:M 17 Sep 2025 03:30:00.094 * 1 changes in 900 seconds. Saving...
+727:M 17 Sep 2025 03:30:00.104 * Background saving started by pid 7714
+7714:C 17 Sep 2025 03:30:00.120 * DB saved on disk
+7714:C 17 Sep 2025 03:30:00.121 * RDB: 0 MB of memory used by copy-on-write
+727:M 17 Sep 2025 03:30:00.204 * Background saving terminated with success
+727:M 17 Sep 2025 03:45:01.067 * 1 changes in 900 seconds. Saving...
+727:M 17 Sep 2025 03:45:01.081 * Background saving started by pid 8906
+8906:C 17 Sep 2025 03:45:01.094 * DB saved on disk
+8906:C 17 Sep 2025 03:45:01.095 * RDB: 0 MB of memory used by copy-on-write
+727:M 17 Sep 2025 03:45:01.181 * Background saving terminated with success
+727:M 17 Sep 2025 04:00:02.047 * 1 changes in 900 seconds. Saving...
+727:M 17 Sep 2025 04:00:02.066 * Background saving started by pid 9716
+9716:C 17 Sep 2025 04:00:02.095 * DB saved on disk
+9716:C 17 Sep 2025 04:00:02.096 * RDB: 0 MB of memory used by copy-on-write
+727:M 17 Sep 2025 04:00:02.166 * Background saving terminated with success
+727:signal-handler (1758092897) Received SIGTERM scheduling shutdown...
+727:M 17 Sep 2025 04:08:17.884 # User requested shutdown...
+727:M 17 Sep 2025 04:08:17.885 * Saving the final RDB snapshot before exiting.
+727:M 17 Sep 2025 04:08:17.932 * DB saved on disk
+727:M 17 Sep 2025 04:08:17.932 * Removing the pid file.
+727:M 17 Sep 2025 04:08:17.932 # Redis is now ready to exit, bye bye...
+732:C 17 Sep 2025 04:15:34.153 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+732:C 17 Sep 2025 04:15:34.168 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+732:C 17 Sep 2025 04:15:34.168 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=732, just started
+732:C 17 Sep 2025 04:15:34.168 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 732
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+732:M 17 Sep 2025 04:15:34.289 # Server initialized
+732:M 17 Sep 2025 04:15:34.289 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+732:M 17 Sep 2025 04:15:34.341 * Loading RDB produced by version 6.0.16
+732:M 17 Sep 2025 04:15:34.345 * RDB age 437 seconds
+732:M 17 Sep 2025 04:15:34.345 * RDB memory usage when created 0.88 Mb
+732:M 17 Sep 2025 04:15:34.345 * DB loaded from disk: 0.048 seconds
+732:M 17 Sep 2025 04:15:34.345 * Ready to accept connections
+732:M 17 Sep 2025 04:30:35.058 * 1 changes in 900 seconds. Saving...
+732:M 17 Sep 2025 04:30:35.074 * Background saving started by pid 2697
+2697:C 17 Sep 2025 04:30:35.094 * DB saved on disk
+2697:C 17 Sep 2025 04:30:35.095 * RDB: 0 MB of memory used by copy-on-write
+732:M 17 Sep 2025 04:30:35.175 * Background saving terminated with success
+743:C 17 Sep 2025 14:16:03.820 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+743:C 17 Sep 2025 14:16:03.971 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+743:C 17 Sep 2025 14:16:03.971 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=743, just started
+743:C 17 Sep 2025 14:16:03.971 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 743
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+743:M 17 Sep 2025 14:16:04.685 # Server initialized
+743:M 17 Sep 2025 14:16:04.686 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+743:M 17 Sep 2025 14:16:04.959 * Loading RDB produced by version 6.0.16
+743:M 17 Sep 2025 14:16:04.961 * RDB age 35129 seconds
+743:M 17 Sep 2025 14:16:04.961 * RDB memory usage when created 0.81 Mb
+743:M 17 Sep 2025 14:16:04.961 * DB loaded from disk: 0.275 seconds
+743:M 17 Sep 2025 14:16:04.961 * Ready to accept connections
+743:M 17 Sep 2025 23:16:12.812 * 1 changes in 900 seconds. Saving...
+743:M 17 Sep 2025 23:16:12.831 * Background saving started by pid 11207
+11207:C 17 Sep 2025 23:16:12.840 * DB saved on disk
+11207:C 17 Sep 2025 23:16:12.840 * RDB: 0 MB of memory used by copy-on-write
+743:M 17 Sep 2025 23:16:12.933 * Background saving terminated with success
+743:M 17 Sep 2025 23:31:13.009 * 1 changes in 900 seconds. Saving...
+743:M 17 Sep 2025 23:31:13.010 * Background saving started by pid 11358
+11358:C 17 Sep 2025 23:31:13.014 * DB saved on disk
+11358:C 17 Sep 2025 23:31:13.016 * RDB: 0 MB of memory used by copy-on-write
+743:M 17 Sep 2025 23:31:13.110 * Background saving terminated with success
+743:M 18 Sep 2025 00:37:54.373 * 1 changes in 900 seconds. Saving...
+743:M 18 Sep 2025 00:37:54.376 * Background saving started by pid 12308
+12308:C 18 Sep 2025 00:37:54.381 * DB saved on disk
+12308:C 18 Sep 2025 00:37:54.382 * RDB: 0 MB of memory used by copy-on-write
+743:M 18 Sep 2025 00:37:54.476 * Background saving terminated with success
+743:M 18 Sep 2025 00:52:55.077 * 1 changes in 900 seconds. Saving...
+743:M 18 Sep 2025 00:52:55.078 * Background saving started by pid 12575
+12575:C 18 Sep 2025 00:52:55.081 * DB saved on disk
+12575:C 18 Sep 2025 00:52:55.082 * RDB: 0 MB of memory used by copy-on-write
+743:M 18 Sep 2025 00:52:55.178 * Background saving terminated with success
+723:C 18 Sep 2025 03:01:28.760 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+723:C 18 Sep 2025 03:01:28.793 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+723:C 18 Sep 2025 03:01:28.793 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=723, just started
+723:C 18 Sep 2025 03:01:28.793 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 723
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+723:M 18 Sep 2025 03:01:28.857 # Server initialized
+723:M 18 Sep 2025 03:01:28.857 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+723:M 18 Sep 2025 03:01:28.907 * Loading RDB produced by version 6.0.16
+723:M 18 Sep 2025 03:01:28.907 * RDB age 7713 seconds
+723:M 18 Sep 2025 03:01:28.907 * RDB memory usage when created 0.81 Mb
+723:M 18 Sep 2025 03:01:28.907 * DB loaded from disk: 0.049 seconds
+723:M 18 Sep 2025 03:01:28.907 * Ready to accept connections
+723:M 18 Sep 2025 03:16:29.015 * 1 changes in 900 seconds. Saving...
+723:M 18 Sep 2025 03:16:29.025 * Background saving started by pid 2496
+2496:C 18 Sep 2025 03:16:29.041 * DB saved on disk
+2496:C 18 Sep 2025 03:16:29.047 * RDB: 0 MB of memory used by copy-on-write
+723:M 18 Sep 2025 03:16:29.126 * Background saving terminated with success
+723:M 18 Sep 2025 03:31:30.040 * 1 changes in 900 seconds. Saving...
+723:M 18 Sep 2025 03:31:30.050 * Background saving started by pid 4280
+4280:C 18 Sep 2025 03:31:30.067 * DB saved on disk
+4280:C 18 Sep 2025 03:31:30.068 * RDB: 0 MB of memory used by copy-on-write
+723:M 18 Sep 2025 03:31:30.150 * Background saving terminated with success
+723:M 18 Sep 2025 03:46:31.096 * 1 changes in 900 seconds. Saving...
+723:M 18 Sep 2025 03:46:31.103 * Background saving started by pid 5526
+5526:C 18 Sep 2025 03:46:31.132 * DB saved on disk
+5526:C 18 Sep 2025 03:46:31.133 * RDB: 0 MB of memory used by copy-on-write
+723:M 18 Sep 2025 03:46:31.203 * Background saving terminated with success
+723:M 18 Sep 2025 04:01:32.095 * 1 changes in 900 seconds. Saving...
+723:M 18 Sep 2025 04:01:32.135 * Background saving started by pid 6892
+6892:C 18 Sep 2025 04:01:32.149 * DB saved on disk
+6892:C 18 Sep 2025 04:01:32.150 * RDB: 0 MB of memory used by copy-on-write
+723:M 18 Sep 2025 04:01:32.235 * Background saving terminated with success
+723:M 18 Sep 2025 04:18:30.023 * 1 changes in 900 seconds. Saving...
+723:M 18 Sep 2025 04:18:30.033 * Background saving started by pid 8586
+8586:C 18 Sep 2025 04:18:30.052 * DB saved on disk
+8586:C 18 Sep 2025 04:18:30.053 * RDB: 0 MB of memory used by copy-on-write
+723:M 18 Sep 2025 04:18:30.134 * Background saving terminated with success
+723:M 18 Sep 2025 04:33:31.040 * 1 changes in 900 seconds. Saving...
+723:M 18 Sep 2025 04:33:31.049 * Background saving started by pid 9356
+9356:C 18 Sep 2025 04:33:31.059 * DB saved on disk
+9356:C 18 Sep 2025 04:33:31.061 * RDB: 0 MB of memory used by copy-on-write
+723:M 18 Sep 2025 04:33:31.150 * Background saving terminated with success
+723:M 18 Sep 2025 12:09:33.084 * 1 changes in 900 seconds. Saving...
+723:M 18 Sep 2025 12:09:33.091 * Background saving started by pid 19022
+19022:C 18 Sep 2025 12:09:33.102 * DB saved on disk
+19022:C 18 Sep 2025 12:09:33.103 * RDB: 0 MB of memory used by copy-on-write
+723:M 18 Sep 2025 12:09:33.191 * Background saving terminated with success
+723:M 18 Sep 2025 12:24:34.037 * 1 changes in 900 seconds. Saving...
+723:M 18 Sep 2025 12:24:34.049 * Background saving started by pid 22530
+22530:C 18 Sep 2025 12:24:34.060 * DB saved on disk
+22530:C 18 Sep 2025 12:24:34.061 * RDB: 0 MB of memory used by copy-on-write
+723:M 18 Sep 2025 12:24:34.149 * Background saving terminated with success
+723:signal-handler (1758210492) Received SIGTERM scheduling shutdown...
+723:M 18 Sep 2025 12:48:12.063 # User requested shutdown...
+723:M 18 Sep 2025 12:48:12.087 * Saving the final RDB snapshot before exiting.
+723:M 18 Sep 2025 12:48:12.132 * DB saved on disk
+723:M 18 Sep 2025 12:48:12.132 * Removing the pid file.
+723:M 18 Sep 2025 12:48:12.132 # Redis is now ready to exit, bye bye...
+785:C 18 Sep 2025 12:55:17.409 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+785:C 18 Sep 2025 12:55:17.462 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+785:C 18 Sep 2025 12:55:17.462 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=785, just started
+785:C 18 Sep 2025 12:55:17.462 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 785
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+785:M 18 Sep 2025 12:55:17.574 # Server initialized
+785:M 18 Sep 2025 12:55:17.574 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+785:M 18 Sep 2025 12:55:17.593 * Loading RDB produced by version 6.0.16
+785:M 18 Sep 2025 12:55:17.593 * RDB age 425 seconds
+785:M 18 Sep 2025 12:55:17.593 * RDB memory usage when created 0.82 Mb
+785:M 18 Sep 2025 12:55:17.593 * DB loaded from disk: 0.015 seconds
+785:M 18 Sep 2025 12:55:17.593 * Ready to accept connections
+786:C 18 Sep 2025 13:12:32.774 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+786:C 18 Sep 2025 13:12:32.790 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+786:C 18 Sep 2025 13:12:32.790 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=786, just started
+786:C 18 Sep 2025 13:12:32.791 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 786
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+786:M 18 Sep 2025 13:12:32.831 # Server initialized
+786:M 18 Sep 2025 13:12:32.831 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+786:M 18 Sep 2025 13:12:32.860 * Loading RDB produced by version 6.0.16
+786:M 18 Sep 2025 13:12:32.861 * RDB age 1460 seconds
+786:M 18 Sep 2025 13:12:32.861 * RDB memory usage when created 0.82 Mb
+786:M 18 Sep 2025 13:12:32.861 * DB loaded from disk: 0.029 seconds
+786:M 18 Sep 2025 13:12:32.861 * Ready to accept connections
+786:M 19 Sep 2025 03:15:47.965 * 1 changes in 900 seconds. Saving...
+786:M 19 Sep 2025 03:15:47.969 * Background saving started by pid 33120
+33120:C 19 Sep 2025 03:15:47.982 * DB saved on disk
+33120:C 19 Sep 2025 03:15:47.983 * RDB: 0 MB of memory used by copy-on-write
+786:M 19 Sep 2025 03:15:48.069 * Background saving terminated with success
+786:M 19 Sep 2025 03:30:49.103 * 1 changes in 900 seconds. Saving...
+786:M 19 Sep 2025 03:30:49.115 * Background saving started by pid 34723
+34723:C 19 Sep 2025 03:30:49.128 * DB saved on disk
+34723:C 19 Sep 2025 03:30:49.129 * RDB: 0 MB of memory used by copy-on-write
+786:M 19 Sep 2025 03:30:49.215 * Background saving terminated with success
+786:M 19 Sep 2025 03:38:32.802 * 10 changes in 300 seconds. Saving...
+786:M 19 Sep 2025 03:38:32.807 * Background saving started by pid 35906
+35906:C 19 Sep 2025 03:38:32.812 * DB saved on disk
+35906:C 19 Sep 2025 03:38:32.813 * RDB: 0 MB of memory used by copy-on-write
+786:M 19 Sep 2025 03:38:32.908 * Background saving terminated with success
+786:M 19 Sep 2025 03:46:55.758 * 10 changes in 300 seconds. Saving...
+786:M 19 Sep 2025 03:46:55.767 * Background saving started by pid 36545
+36545:C 19 Sep 2025 03:46:55.784 * DB saved on disk
+36545:C 19 Sep 2025 03:46:55.785 * RDB: 0 MB of memory used by copy-on-write
+786:M 19 Sep 2025 03:46:55.867 * Background saving terminated with success
+786:signal-handler (1758264469) Received SIGTERM scheduling shutdown...
+786:M 19 Sep 2025 03:47:49.309 # User requested shutdown...
+786:M 19 Sep 2025 03:47:49.318 * Saving the final RDB snapshot before exiting.
+786:M 19 Sep 2025 03:47:49.350 * DB saved on disk
+786:M 19 Sep 2025 03:47:49.350 * Removing the pid file.
+786:M 19 Sep 2025 03:47:49.350 # Redis is now ready to exit, bye bye...
+836:C 19 Sep 2025 03:59:57.337 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+836:C 19 Sep 2025 03:59:57.350 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+836:C 19 Sep 2025 03:59:57.350 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=836, just started
+836:C 19 Sep 2025 03:59:57.350 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 836
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+836:M 19 Sep 2025 03:59:57.399 # Server initialized
+836:M 19 Sep 2025 03:59:57.399 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+836:M 19 Sep 2025 03:59:57.411 * Loading RDB produced by version 6.0.16
+836:M 19 Sep 2025 03:59:57.411 * RDB age 728 seconds
+836:M 19 Sep 2025 03:59:57.411 * RDB memory usage when created 0.86 Mb
+836:M 19 Sep 2025 03:59:57.411 * DB loaded from disk: 0.012 seconds
+836:M 19 Sep 2025 03:59:57.411 * Ready to accept connections
+836:signal-handler (1758267929) Received SIGTERM scheduling shutdown...
+836:M 19 Sep 2025 04:45:29.202 # User requested shutdown...
+836:M 19 Sep 2025 04:45:29.247 * Saving the final RDB snapshot before exiting.
+836:M 19 Sep 2025 04:45:29.260 * DB saved on disk
+836:M 19 Sep 2025 04:45:29.261 * Removing the pid file.
+836:M 19 Sep 2025 04:45:29.261 # Redis is now ready to exit, bye bye...
+4673:C 19 Sep 2025 04:45:29.442 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+4673:C 19 Sep 2025 04:45:29.443 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+4673:C 19 Sep 2025 04:45:29.443 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=4673, just started
+4673:C 19 Sep 2025 04:45:29.443 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 4673
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+4673:M 19 Sep 2025 04:45:29.447 # Server initialized
+4673:M 19 Sep 2025 04:45:29.447 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+4673:M 19 Sep 2025 04:45:29.448 * Loading RDB produced by version 6.0.16
+4673:M 19 Sep 2025 04:45:29.448 * RDB age 0 seconds
+4673:M 19 Sep 2025 04:45:29.448 * RDB memory usage when created 0.77 Mb
+4673:M 19 Sep 2025 04:45:29.448 * DB loaded from disk: 0.000 seconds
+4673:M 19 Sep 2025 04:45:29.448 * Ready to accept connections
+4673:signal-handler (1758268267) Received SIGTERM scheduling shutdown...
+4673:M 19 Sep 2025 04:51:07.803 # User requested shutdown...
+4673:M 19 Sep 2025 04:51:07.809 * Saving the final RDB snapshot before exiting.
+4673:M 19 Sep 2025 04:51:07.821 * DB saved on disk
+4673:M 19 Sep 2025 04:51:07.821 * Removing the pid file.
+4673:M 19 Sep 2025 04:51:07.821 # Redis is now ready to exit, bye bye...
+5387:C 19 Sep 2025 04:51:07.966 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+5387:C 19 Sep 2025 04:51:07.967 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+5387:C 19 Sep 2025 04:51:07.967 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=5387, just started
+5387:C 19 Sep 2025 04:51:07.967 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 5387
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+5387:M 19 Sep 2025 04:51:07.968 # Server initialized
+5387:M 19 Sep 2025 04:51:07.968 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+5387:M 19 Sep 2025 04:51:07.969 * Loading RDB produced by version 6.0.16
+5387:M 19 Sep 2025 04:51:07.969 * RDB age 0 seconds
+5387:M 19 Sep 2025 04:51:07.969 * RDB memory usage when created 0.77 Mb
+5387:M 19 Sep 2025 04:51:07.969 * DB loaded from disk: 0.000 seconds
+5387:M 19 Sep 2025 04:51:07.969 * Ready to accept connections
+5387:signal-handler (1758268371) Received SIGTERM scheduling shutdown...
+5387:M 19 Sep 2025 04:52:51.218 # User requested shutdown...
+5387:M 19 Sep 2025 04:52:51.218 * Saving the final RDB snapshot before exiting.
+5387:M 19 Sep 2025 04:52:51.222 * DB saved on disk
+5387:M 19 Sep 2025 04:52:51.222 * Removing the pid file.
+5387:M 19 Sep 2025 04:52:51.222 # Redis is now ready to exit, bye bye...
+5446:C 19 Sep 2025 04:52:51.302 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+5446:C 19 Sep 2025 04:52:51.302 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+5446:C 19 Sep 2025 04:52:51.302 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=5446, just started
+5446:C 19 Sep 2025 04:52:51.302 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 5446
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+5446:M 19 Sep 2025 04:52:51.304 # Server initialized
+5446:M 19 Sep 2025 04:52:51.304 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+5446:M 19 Sep 2025 04:52:51.304 * Loading RDB produced by version 6.0.16
+5446:M 19 Sep 2025 04:52:51.304 * RDB age 0 seconds
+5446:M 19 Sep 2025 04:52:51.304 * RDB memory usage when created 0.77 Mb
+5446:M 19 Sep 2025 04:52:51.304 * DB loaded from disk: 0.000 seconds
+5446:M 19 Sep 2025 04:52:51.304 * Ready to accept connections
+5446:signal-handler (1758268480) Received SIGTERM scheduling shutdown...
+5446:M 19 Sep 2025 04:54:41.015 # User requested shutdown...
+5446:M 19 Sep 2025 04:54:41.024 * Saving the final RDB snapshot before exiting.
+5446:M 19 Sep 2025 04:54:41.033 * DB saved on disk
+5446:M 19 Sep 2025 04:54:41.033 * Removing the pid file.
+5446:M 19 Sep 2025 04:54:41.034 # Redis is now ready to exit, bye bye...
+5890:C 19 Sep 2025 04:54:56.183 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+5890:C 19 Sep 2025 04:54:56.185 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+5890:C 19 Sep 2025 04:54:56.185 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=5890, just started
+5890:C 19 Sep 2025 04:54:56.185 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 5890
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+5890:M 19 Sep 2025 04:54:56.187 # Server initialized
+5890:M 19 Sep 2025 04:54:56.187 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+5890:M 19 Sep 2025 04:54:56.188 * Loading RDB produced by version 6.0.16
+5890:M 19 Sep 2025 04:54:56.188 * RDB age 15 seconds
+5890:M 19 Sep 2025 04:54:56.188 * RDB memory usage when created 0.77 Mb
+5890:M 19 Sep 2025 04:54:56.188 * DB loaded from disk: 0.000 seconds
+5890:M 19 Sep 2025 04:54:56.188 * Ready to accept connections
+5890:signal-handler (1758268769) Received SIGTERM scheduling shutdown...
+5890:M 19 Sep 2025 04:59:29.944 # User requested shutdown...
+5890:M 19 Sep 2025 04:59:29.945 * Saving the final RDB snapshot before exiting.
+5890:M 19 Sep 2025 04:59:29.951 * DB saved on disk
+5890:M 19 Sep 2025 04:59:29.951 * Removing the pid file.
+5890:M 19 Sep 2025 04:59:29.951 # Redis is now ready to exit, bye bye...
+5995:C 19 Sep 2025 04:59:37.833 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+5995:C 19 Sep 2025 04:59:37.834 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+5995:C 19 Sep 2025 04:59:37.834 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=5995, just started
+5995:C 19 Sep 2025 04:59:37.834 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 5995
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+5995:M 19 Sep 2025 04:59:37.836 # Server initialized
+5995:M 19 Sep 2025 04:59:37.836 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+5995:M 19 Sep 2025 04:59:37.836 * Loading RDB produced by version 6.0.16
+5995:M 19 Sep 2025 04:59:37.836 * RDB age 8 seconds
+5995:M 19 Sep 2025 04:59:37.836 * RDB memory usage when created 0.77 Mb
+5995:M 19 Sep 2025 04:59:37.836 * DB loaded from disk: 0.000 seconds
+5995:M 19 Sep 2025 04:59:37.836 * Ready to accept connections
+5995:signal-handler (1758269051) Received SIGTERM scheduling shutdown...
+5995:M 19 Sep 2025 05:04:11.493 # User requested shutdown...
+5995:M 19 Sep 2025 05:04:11.496 * Saving the final RDB snapshot before exiting.
+5995:M 19 Sep 2025 05:04:11.508 * DB saved on disk
+5995:M 19 Sep 2025 05:04:11.508 * Removing the pid file.
+5995:M 19 Sep 2025 05:04:11.508 # Redis is now ready to exit, bye bye...
+6660:C 19 Sep 2025 05:04:11.660 # WARNING supervised by systemd - you MUST set appropriate values for TimeoutStartSec and TimeoutStopSec in your service unit.
+6660:C 19 Sep 2025 05:04:11.661 # oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+6660:C 19 Sep 2025 05:04:11.661 # Redis version=6.0.16, bits=64, commit=00000000, modified=0, pid=6660, just started
+6660:C 19 Sep 2025 05:04:11.661 # Configuration loaded
+                _._                                                  
+           _.-``__ ''-._                                             
+      _.-``    `.  `_.  ''-._           Redis 6.0.16 (00000000/0) 64 bit
+  .-`` .-```.  ```\/    _.,_ ''-._                                   
+ (    '      ,       .-`  | `,    )     Running in standalone mode
+ |`-._`-...-` __...-.``-._|'` _.-'|     Port: 6379
+ |    `-._   `._    /     _.-'    |     PID: 6660
+  `-._    `-._  `-./  _.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |           http://redis.io        
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+ |`-._`-._    `-.__.-'    _.-'_.-'|                                  
+ |    `-._`-._        _.-'_.-'    |                                  
+  `-._    `-._`-.__.-'_.-'    _.-'                                   
+      `-._    `-.__.-'    _.-'                                       
+          `-._        _.-'                                           
+              `-.__.-'                                               
+
+6660:M 19 Sep 2025 05:04:11.663 # Server initialized
+6660:M 19 Sep 2025 05:04:11.663 # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.
+6660:M 19 Sep 2025 05:04:11.663 * Loading RDB produced by version 6.0.16
+6660:M 19 Sep 2025 05:04:11.663 * RDB age 0 seconds
+6660:M 19 Sep 2025 05:04:11.663 * RDB memory usage when created 0.77 Mb
+6660:M 19 Sep 2025 05:04:11.663 * DB loaded from disk: 0.000 seconds
+6660:M 19 Sep 2025 05:04:11.663 * Ready to accept connections

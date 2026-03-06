@@ -1,0 +1,76 @@
+<!-- comandas.html -->
+<style>
+.badge-comanda-aberta   { background: #dcfce7; color: #15803d; }
+.badge-comanda-enviada  { background: #dbeafe; color: #1d4ed8; }
+.badge-comanda-cancelada{ background: #fee2e2; color: #dc2626; }
+</style>
+
+<div class="erp-page">
+
+  <!-- Cabeçalho -->
+  <div class="erp-header">
+    <div class="erp-header-left">
+      <h1 class="erp-page-title">
+        <i class="bi bi-receipt"></i>
+        Comandas
+      </h1>
+      <button data-submit class="btn-reload" title="Recarregar">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </div>
+    <div class="erp-header-actions">
+      <button id="btn-criar-comanda" class="btn-erp btn-erp-primary">
+        <i class="bi bi-plus-lg"></i> Nova Comanda
+      </button>
+    </div>
+  </div>
+
+  <!-- Filtros -->
+  <div class="erp-filters">
+    <div class="erp-filters-header">
+      <i class="bi bi-funnel"></i> Filtros
+    </div>
+    <div class="erp-filters-grid" style="grid-template-columns: 180px 1fr auto;">
+      <div>
+        <label class="erp-label" for="filtro-comanda-status">Status</label>
+        <select class="erp-select" id="filtro-comanda-status">
+          <option value="">Todos</option>
+          <option value="aberta" selected>Abertas</option>
+          <option value="enviada">Enviadas</option>
+          <option value="cancelada">Canceladas</option>
+        </select>
+      </div>
+      <div>
+        <label class="erp-label" for="filtro-comanda-busca">Buscar</label>
+        <input type="text" class="erp-input" id="filtro-comanda-busca" placeholder="Número, cliente...">
+      </div>
+      <div style="display:flex; align-items:flex-end; gap:8px;">
+        <button id="btn-comanda-filtrar" class="btn-erp btn-erp-primary">
+          <i class="bi bi-search"></i>
+        </button>
+        <button id="btn-comanda-limpar" class="btn-erp btn-erp-secondary">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <div class="erp-table-wrapper">
+    <table id="tabela-comandas" class="erp-table display" style="width:100%">
+      <thead>
+        <tr>
+          <th>Número</th>
+          <th>Cliente</th>
+          <th>Operador</th>
+          <th>PDV Destino</th>
+          <th>Status</th>
+          <th>Criado em</th>
+          <th class="no-export">Ações</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+</div>

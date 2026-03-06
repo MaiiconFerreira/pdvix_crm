@@ -8,14 +8,27 @@ use App\Core\Database;
  * CargaInicialController
  *
  * Endpoint exclusivo para o PDV Electron carregar todos os dados mestres
- * necessários para funcionar offline (produtos, códigos de barras, usuários,
- * cartões de supervisor e clientes).
+ * necessários para funcionar offline.
  *
- * Autenticação: token estático armazenado em config.chave = 'api_token'.
- * Gere o token com: UPDATE config SET valor = UUID() WHERE chave = 'api_token';
+ * Autenticação: token estático (config.api_token) via validarTokenPdv().
  *
- * Rota mapeada em routes.php:
- *   GET  /api/carga-inicial?token=XXX  → index()
+ * Rota:
+ *   GET /api/carga-inicial?token=XXX[&loja_id=1]  → index()
+ *
+ * Payload de resposta:
+ * {
+ *   "produtos":             [...],   id, nome, codigo_interno_alternativo,
+ *                                    preco_venda, fator_embalagem, unidade_base, bloqueado
+ *   "codigos_barras":       [...],   produto_id, codigo_barras, tipo_embalagem, preco_venda
+ *   "usuarios":             [...],   id, login, perfil, nome, cpf, status  (SEM password)
+ *   "supervisores_cartoes": [...],   id, usuario_id, codigo_cartao, permissões...
+ *   "clientes":             [...]    id, nome, cpf, telefone, status
+ * }
+ *
+ * Nota sobre loja_id:
+ *   - Após migration_v3, produtos e supervisores_cartoes terão loja_id.
+ *   - O parâmetro ?loja_id=X filtra os dados da loja específica.
+ *   - Antes da migration, o parâmetro é ignorado e todos os dados são retornados.
  */
 class CargaInicialController extends Controller
 {
@@ -34,13 +47,18 @@ class CargaInicialController extends Controller
     {
         $this->jsonHeader();
         $this->ensureMethod('GET');
-        $this->validarToken();
+        $this->validarTokenPdv();
+
+        // loja_id opcional — filtra dados por loja quando a coluna existir
+        $lojaId = !empty($_GET['loja_id']) && is_numeric($_GET['loja_id'])
+            ? (int) $_GET['loja_id']
+            : null;
 
         $this->responseJson('success', [
-            'produtos'             => $this->getProdutos(),
-            'codigos_barras'       => $this->getCodigosBarras(),
-            'usuarios'             => $this->getUsuarios(),
-            'supervisores_cartoes' => $this->getSupCards(),
+            'produtos'             => $this->getProdutos($lojaId),
+            'codigos_barras'       => $this->getCodigosBarras($lojaId),
+            'usuarios'             => $this->getUsuarios($lojaId),
+            'supervisores_cartoes' => $this->getSupCards($lojaId),
             'clientes'             => $this->getClientes(),
         ], 'Carga inicial carregada com sucesso.');
     }
@@ -49,50 +67,52 @@ class CargaInicialController extends Controller
     // HELPERS PRIVADOS
     // =========================================================================
 
-    /** Valida o token da requisição contra o valor armazenado em config. */
-    private function validarToken(): void
+    /**
+     * Produtos ativos — exclui bloqueados.
+     * Filtra por loja_id se a coluna existir (pós-migration v3).
+     */
+    private function getProdutos(?int $lojaId): array
     {
-        $token = trim($_GET['token'] ?? '');
+        $where  = 'WHERE p.bloqueado = 0';
+        $params = [];
 
-        $stmt = $this->pdo->prepare(
-            "SELECT valor FROM config WHERE chave = 'api_token' LIMIT 1"
-        );
-        $stmt->execute();
-        $row = $stmt->fetch(\PDO::FETCH_OBJ);
-
-        if (!$row || empty($row->valor) || !hash_equals($row->valor, $token)) {
-            $this->responseJson('error', [], 'Token inválido ou ausente.', 401);
+        if ($lojaId !== null && $this->_colunaExiste('produtos', 'loja_id')) {
+            $where          .= ' AND p.loja_id = :loja_id';
+            $params[':loja_id'] = $lojaId;
         }
-    }
 
-    /**
-     * Produtos ativos com todos os campos necessários para o PDV.
-     * Exclui bloqueados.
-     */
-    private function getProdutos(): array
-    {
-        return $this->pdo->query("
+        $stmt = $this->pdo->prepare("
             SELECT
-                id,
-                nome,
-                codigo_interno_alternativo,
-                preco_venda,
-                fator_embalagem,
-                unidade_base,
-                bloqueado
-            FROM produtos
-            WHERE bloqueado = 0
-            ORDER BY nome
-        ")->fetchAll(\PDO::FETCH_ASSOC);
+                p.id,
+                p.nome,
+                p.codigo_interno_alternativo,
+                p.preco_venda,
+                p.fator_embalagem,
+                p.unidade_base,
+                p.bloqueado
+            FROM produtos p
+            {$where}
+            ORDER BY p.nome
+        ");
+        $stmt->execute($params);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     /**
-     * Todos os códigos de barras de produtos ativos.
-     * Retorna array plano — o Electron faz o JOIN localmente.
+     * Códigos de barras de todos os produtos ativos da loja.
      */
-    private function getCodigosBarras(): array
+    private function getCodigosBarras(?int $lojaId): array
     {
-        return $this->pdo->query("
+        $join   = '';
+        $where  = 'WHERE p.bloqueado = 0';
+        $params = [];
+
+        if ($lojaId !== null && $this->_colunaExiste('produtos', 'loja_id')) {
+            $where          .= ' AND p.loja_id = :loja_id';
+            $params[':loja_id'] = $lojaId;
+        }
+
+        $stmt = $this->pdo->prepare("
             SELECT
                 pcb.produto_id,
                 pcb.codigo_barras,
@@ -100,48 +120,71 @@ class CargaInicialController extends Controller
                 pcb.preco_venda
             FROM produtos_codigos_barras pcb
             JOIN produtos p ON p.id = pcb.produto_id
-            WHERE p.bloqueado = 0
-        ")->fetchAll(\PDO::FETCH_ASSOC);
+            {$where}
+        ");
+        $stmt->execute($params);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     /**
      * Usuários ativos — SEM campo password.
-     * O hash bcrypt para auth offline é gerado e salvo pelo Electron no momento
-     * do login online; aqui só sincronizamos os metadados.
+     * O hash bcrypt para auth offline é gerado pelo Electron no login online.
+     * Filtra por loja via loja_usuarios quando multi-loja estiver ativo.
      */
-    private function getUsuarios(): array
+    private function getUsuarios(?int $lojaId): array
     {
-        return $this->pdo->query("
-            SELECT id, login, perfil, nome, cpf, status
-            FROM usuarios
-            WHERE status = 'ativado'
-        ")->fetchAll(\PDO::FETCH_ASSOC);
+        $where  = "WHERE u.status = 'ativado'";
+        $params = [];
+
+        // Filtra por loja via tabela de relacionamento loja_usuarios (pós-migration v3)
+        if ($lojaId !== null && $this->_tabelaExiste('loja_usuarios')) {
+            $where .= ' AND EXISTS (
+                SELECT 1 FROM loja_usuarios lu
+                WHERE lu.usuario_id = u.id AND lu.loja_id = :loja_id
+            )';
+            $params[':loja_id'] = $lojaId;
+        }
+
+        $stmt = $this->pdo->prepare("
+            SELECT u.id, u.login, u.perfil, u.nome, u.cpf, u.status
+            FROM usuarios u
+            {$where}
+        ");
+        $stmt->execute($params);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     /**
-     * Cartões de supervisor ativos.
-     * Tabela criada pela migration_v2.sql.
+     * Cartões de supervisor ativos da loja.
      */
-    private function getSupCards(): array
+    private function getSupCards(?int $lojaId): array
     {
         try {
-            return $this->pdo->query("
+            $where  = 'WHERE sc.ativo = 1';
+            $params = [];
+
+            if ($lojaId !== null && $this->_colunaExiste('supervisores_cartoes', 'loja_id')) {
+                $where          .= ' AND sc.loja_id = :loja_id';
+                $params[':loja_id'] = $lojaId;
+            }
+
+            $stmt = $this->pdo->prepare("
                 SELECT
-                    id, usuario_id, codigo_cartao, descricao,
-                    permite_desconto_item, permite_desconto_venda,
-                    permite_cancelar_item, permite_cancelar_venda, ativo
-                FROM supervisores_cartoes
-                WHERE ativo = 1
-            ")->fetchAll(\PDO::FETCH_ASSOC);
+                    sc.id, sc.usuario_id, sc.codigo_cartao, sc.descricao,
+                    sc.permite_desconto_item, sc.permite_desconto_venda,
+                    sc.permite_cancelar_item, sc.permite_cancelar_venda, sc.ativo
+                FROM supervisores_cartoes sc
+                {$where}
+            ");
+            $stmt->execute($params);
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
-            // Tabela pode não existir antes da migration — retorna array vazio
             return [];
         }
     }
 
     /**
-     * Clientes ativos para busca por CPF no PDV.
-     * Tabela criada pela migration_v2.sql.
+     * Clientes ativos — não filtrado por loja (clientes são globais).
      */
     private function getClientes(): array
     {
@@ -154,6 +197,41 @@ class CargaInicialController extends Controller
             ")->fetchAll(\PDO::FETCH_ASSOC);
         } catch (\PDOException $e) {
             return [];
+        }
+    }
+
+    /**
+     * Verifica se uma coluna existe em uma tabela.
+     * Usado para compatibilidade pré/pós migration_v3.
+     */
+    private function _colunaExiste(string $tabela, string $coluna): bool
+    {
+        try {
+            $stmt = $this->pdo->prepare(
+                "SELECT COUNT(*) FROM information_schema.COLUMNS
+                 WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ? AND COLUMN_NAME = ?"
+            );
+            $stmt->execute([$tabela, $coluna]);
+            return (int) $stmt->fetchColumn() > 0;
+        } catch (\Throwable) {
+            return false;
+        }
+    }
+
+    /**
+     * Verifica se uma tabela existe.
+     */
+    private function _tabelaExiste(string $tabela): bool
+    {
+        try {
+            $stmt = $this->pdo->prepare(
+                "SELECT COUNT(*) FROM information_schema.TABLES
+                 WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = ?"
+            );
+            $stmt->execute([$tabela]);
+            return (int) $stmt->fetchColumn() > 0;
+        } catch (\Throwable) {
+            return false;
         }
     }
 }
