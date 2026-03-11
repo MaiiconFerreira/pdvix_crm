@@ -92,10 +92,11 @@ function getRedis(): \Redis
 }
 
 // ── Ambiente ──────────────────────────────────────────────────────────────────
-$IS_PROD = (getenv('PDV_ENV') === 'production');
+//$IS_PROD = (getenv('PDV_ENV') === 'production');
+$IS_PROD = true;
 
 if ($IS_PROD) {
-    $host     = getenv('PDV_HOST') ?: ($_SERVER['HTTP_HOST'] ?? 'localhost');
+    $host     = "pdvix.vps-kinghost.net";
     $certBase = '/etc/letsencrypt/live/' . $host;
 
     $SSL_CONTEXT = [
@@ -289,7 +290,11 @@ $ws->onWorkerStart = function () use (&$clients, &$pdvIndex, &$adminIndex) {
             $connId = $pdvIndex[$destino] ?? null;
             $conn   = $connId ? ($clients[$connId]['conn'] ?? null) : null;
             if ($conn) {
-                $conn->send(json_encode(['event' => 'pdv:pagamento_confirmado', 'payload' => $data]));
+                $evento = 'pdv:pagamento_confirmado';
+                if (isset($data['status']) && in_array($data['status'], ['failed', 'canceled'])) {
+                    $evento = 'pdv:pagamento_cancelado';
+                }
+                $conn->send(json_encode(['event' => $evento, 'payload' => $data]));
                 echo "[PAGAMENTO] → PDV {$destino} | venda {$numeroVenda}\n";
             }
             getRedis()->del("pdv:venda_pdv:{$numeroVenda}");

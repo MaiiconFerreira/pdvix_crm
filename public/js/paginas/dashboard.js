@@ -327,9 +327,11 @@ window.PageFunctions['dashboard'] = function () {
   // Escuta eventos do pdv_server.php (Workerman) para atualizar KPIs
   // imediatamente quando uma venda é finalizada ou cancelada.
   try {
-    const wsUrl = (window.location.protocol === 'https:' ? 'wss://' : 'ws://')
+    /*const wsUrl = (window.location.protocol === 'https:' ? 'wss://' : 'ws://')
                 + window.location.host
-                + '/ws';
+                + '/ws';*/
+          
+      const wsUrl = "wss://pdvix.vps-kinghost.net:8443";
 
     const wsDash = new WebSocket(wsUrl);
 

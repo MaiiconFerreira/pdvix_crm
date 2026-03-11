@@ -1,0 +1,107 @@
+<style>
+  /* Badges específicos do Pagar.me seguindo o design system do ERP */
+  .badge-pgm-tipo-pix        { background: #e0f2fe; color: #0284c7; }
+  .badge-pgm-tipo-pos        { background: #f3e8ff; color: #7e22ce; }
+  .badge-pgm-status-paid     { background: #dcfce7; color: #166534; }
+  .badge-pgm-status-pending  { background: #fef9c3; color: #a16207; }
+  .badge-pgm-status-canceled { background: #fee2e2; color: #dc2626; }
+</style>
+
+<div class="erp-page">
+
+  <div class="erp-header">
+    <div class="erp-header-left">
+      <h1 class="erp-page-title">
+        <i class="bi bi-credit-card"></i>
+        Transações Pagar.me
+      </h1>
+      <button data-submit class="btn-reload" title="Recarregar">
+        <i class="bi bi-arrow-clockwise"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="erp-cards">
+    <div class="erp-card erp-card--primary">
+      <div class="erp-card-icon"><i class="bi bi-receipt"></i></div>
+      <div class="erp-card-value" id="card-pgm-total">—</div>
+      <div class="erp-card-label">Total Listado</div>
+    </div>
+    <div class="erp-card erp-card--success">
+      <div class="erp-card-icon"><i class="bi bi-check-circle"></i></div>
+      <div class="erp-card-value" id="card-pgm-pagos">—</div>
+      <div class="erp-card-label">Pagos</div>
+    </div>
+    <div class="erp-card erp-card--warning">
+      <div class="erp-card-icon"><i class="bi bi-hourglass-split"></i></div>
+      <div class="erp-card-value" id="card-pgm-pendentes">—</div>
+      <div class="erp-card-label">Pendentes</div>
+    </div>
+    <div class="erp-card erp-card--danger">
+      <div class="erp-card-icon"><i class="bi bi-x-circle"></i></div>
+      <div class="erp-card-value" id="card-pgm-cancelados">—</div>
+      <div class="erp-card-label">Cancelados / Falhas</div>
+    </div>
+  </div>
+
+  <div class="erp-filters">
+    <div class="erp-filters-header">
+      <i class="bi bi-funnel"></i> Filtros
+    </div>
+    <div class="erp-filters-grid">
+      <div>
+        <label class="erp-label" for="filtro-pgm-status">Status</label>
+        <select class="erp-select" id="filtro-pgm-status">
+          <option value="">Todos</option>
+          <option value="paid">Pagos</option>
+          <option value="pending">Pendentes</option>
+          <option value="canceled">Cancelados</option>
+          <option value="failed">Falhas</option>
+        </select>
+      </div>
+      <div>
+        <label class="erp-label" for="filtro-pgm-tipo">Tipo</label>
+        <select class="erp-select" id="filtro-pgm-tipo">
+          <option value="">Todos</option>
+          <option value="pix">PIX (Painel/Token)</option>
+          <option value="pos_pix">PIX (Maquininha)</option>
+          <option value="pos_debito">POS Débito</option>
+          <option value="pos_credito">POS Crédito</option>
+        </select>
+      </div>
+      <div>
+        <label class="erp-label" for="filtro-pgm-di">Data início</label>
+        <input type="date" class="erp-input" id="filtro-pgm-di">
+      </div>
+      <div>
+        <label class="erp-label" for="filtro-pgm-df">Data fim</label>
+        <input type="date" class="erp-input" id="filtro-pgm-df">
+      </div>
+      <div style="display:flex; align-items:flex-end; gap:8px;">
+        <button id="btn-pgm-filtrar" class="btn-erp btn-erp-primary" style="flex:1;">
+          <i class="bi bi-search"></i> Filtrar
+        </button>
+        <button id="btn-pgm-limpar" class="btn-erp btn-erp-secondary" title="Limpar Filtros">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="erp-table-wrapper">
+    <table id="tabela-pagarme" class="erp-table display" style="width:100%">
+      <thead>
+        <tr>
+          <th>Data/Hora</th>
+          <th>Nº Venda</th>
+          <th>Order ID</th>
+          <th>Tipo</th>
+          <th>Status</th>
+          <th class="text-center">Ações</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+</div>

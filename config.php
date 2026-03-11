@@ -1,17 +1,17 @@
 <?php
 
-$prod = false;
+$prod = true;
 
 define('APPLICATION_VERSION', '1.0.0');
 
 define('DB_HOST', 'localhost');
 define('DB_NAME', ($prod) ? 'pdvix_crm' : 'pdvix_crm');
 define('DB_USER', ($prod) ? 'root' : 'root');
-define('DB_PASS', ($prod) ? '' : '');
+define('DB_PASS', ($prod) ? 'Maiconmiko123@' : '');
 
 define('PATH_SCREENS', '/');
 define('CORS_ALLOW_URLS', '/');
-$GLOBALS['CORS_ALLOW_DOMAIN'] = ['http://localhost'];
+$GLOBALS['CORS_ALLOW_DOMAIN'] = ['https://pdvix.vps-kinghost.net'];
 
 define('PATH_LOGS', ($prod) ? '/var/www/html/logs/' : 'C:/xampp/pdvix_crm/logs/');
 
@@ -25,7 +25,8 @@ define('PAGARME_WEBHOOK_SECRET', getenv('PAGARME_WEBHOOK_SECRET') ?: 'whsec_COLO
 // ── PDV Electron ──────────────────────────────────────────────────────────────
 // Token estático compartilhado com o PDV Electron para autenticação das rotas /api/pdv/sync-*
 // Gere um UUID v4 e salve também na tabela config (chave = 'api_token')
-define('PDV_API_TOKEN', getenv('PDV_API_TOKEN') ?: 'COLOQUE_UM_TOKEN_SEGURO_AQUI');
+define('PDV_API_TOKEN', getenv('PDV_API_TOKEN') ?: '7f6b4d0f-1823-11f1-ada3-988389d8ef6c');
+define('PDV_HOST', 'pdvix.vps-kinghost.net');
 
 // ── Redis ─────────────────────────────────────────────────────────────────────
 define('REDIS_HOST', getenv('REDIS_HOST') ?: '127.0.0.1');

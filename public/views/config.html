@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Configurações | PDVix CRM</title>
+  <!-- AdminLTE / Bootstrap já carregados pelo layout pai -->
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Content Wrapper -->
+  <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1><i class="fas fa-cogs mr-2"></i>Configurações</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Configurações</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container-fluid">
+
+        <!-- Alerta de perfil (exibido via JS se não for admin) -->
+        <div id="alert-sem-permissao" class="alert alert-danger d-none">
+          <i class="fas fa-lock mr-1"></i>
+          Acesso restrito. Somente administradores podem acessar as configurações.
+        </div>
+
+        <div id="conteudo-config">
+
+          <!-- ── Tabs ─────────────────────────────────────────────────────── -->
+          <ul class="nav nav-tabs" id="configTabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="tab-geral-link" data-toggle="tab" href="#tab-geral">
+                <i class="fas fa-sliders-h mr-1"></i>Geral
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tab-pagamento-link" data-toggle="tab" href="#tab-pagamento">
+                <i class="fas fa-credit-card mr-1"></i>Pagamentos
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="tab-maquininhas-link" data-toggle="tab" href="#tab-maquininhas">
+                <i class="fas fa-tablet-alt mr-1"></i>Maquininhas
+              </a>
+            </li>
+          </ul>
+
+          <div class="tab-content card card-body border-top-0 rounded-0 rounded-bottom">
+
+            <!-- ── Tab Geral ────────────────────────────────────────────── -->
+            <div class="tab-pane fade show active" id="tab-geral">
+              <form id="form-geral">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Nome da Loja</label>
+                      <input type="text" class="form-control" id="cfg-nome_loja" data-chave="nome_loja" placeholder="Ex: PDVix Loja Centro">
+                    </div>
+                    <div class="form-group">
+                      <label>CNPJ</label>
+                      <input type="text" class="form-control" id="cfg-cnpj_loja" data-chave="cnpj_loja" placeholder="00.000.000/0001-00">
+                    </div>
+                    <div class="form-group">
+                      <label>Telefone</label>
+                      <input type="text" class="form-control" id="cfg-telefone_loja" data-chave="telefone_loja">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Endereço</label>
+                      <input type="text" class="form-control" id="cfg-endereco_loja" data-chave="endereco_loja">
+                    </div>
+                    <div class="form-group">
+                      <label>E-mail</label>
+                      <input type="email" class="form-control" id="cfg-email_loja" data-chave="email_loja">
+                    </div>
+                    <div class="form-group">
+                      <label>URL do Logo <small class="text-muted">(URL pública da imagem)</small></label>
+                      <input type="text" class="form-control" id="cfg-logo_url" data-chave="logo_url">
+                    </div>
+                  </div>
+                </div>
+                <button type="button" id="btn-salvar-geral" class="btn btn-primary">
+                  <i class="fas fa-save mr-1"></i>Salvar Configurações Gerais
+                </button>
+              </form>
+            </div>
+
+            <!-- ── Tab Pagamentos ───────────────────────────────────────── -->
+            <div class="tab-pane fade" id="tab-pagamento">
+              <form id="form-pagamento">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Pagar.me — API Key
+                        <small class="text-muted">(sk_...)</small>
+                      </label>
+                      <div class="input-group">
+                        <input type="password" class="form-control" id="cfg-pagarme_api_key" data-chave="pagarme_api_key" placeholder="Deixe vazio para manter o atual">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary btn-toggle-senha" type="button" data-target="cfg-pagarme_api_key">
+                            <i class="fas fa-eye"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <small class="text-muted">Deixe em branco para manter a chave atual.</small>
+                    </div>
+                    <div class="form-group">
+                      <label>Pagar.me — Webhook Secret</label>
+                      <div class="input-group">
+                        <input type="password" class="form-control" id="cfg-pagarme_webhook_secret" data-chave="pagarme_webhook_secret" placeholder="Deixe vazio para manter o atual">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary btn-toggle-senha" type="button" data-target="cfg-pagarme_webhook_secret">
+                            <i class="fas fa-eye"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Pagar.me — Customer ID fixo
+                        <small class="text-muted">(cus_...)</small>
+                      </label>
+                      <input type="text" class="form-control" id="cfg-pagarme_customer_id" data-chave="pagarme_customer_id" placeholder="Opcional">
+                    </div>
+                    <div class="form-group">
+                      <label>Expiração PIX <small class="text-muted">(segundos)</small></label>
+                      <input type="number" class="form-control" id="cfg-pix_expiracao_segundos" data-chave="pix_expiracao_segundos" value="600" min="60" max="3600">
+                    </div>
+                    <div class="form-group">
+                      <label>API Token PDV</label>
+                      <div class="input-group">
+                        <input type="password" class="form-control" id="cfg-api_token" data-chave="api_token" placeholder="Deixe vazio para manter o atual">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary btn-toggle-senha" type="button" data-target="cfg-api_token">
+                            <i class="fas fa-eye"></i>
+                          </button>
+                        </div>
+                      </div>
+                      <small class="text-muted">Token usado pelo PDV Electron para autenticar na API.</small>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" id="btn-salvar-pagamento" class="btn btn-primary">
+                  <i class="fas fa-save mr-1"></i>Salvar Configurações de Pagamento
+                </button>
+              </form>
+            </div>
+
+            <!-- ── Tab Maquininhas ──────────────────────────────────────── -->
+            <div class="tab-pane fade" id="tab-maquininhas">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="m-0">Maquininhas Stone POS cadastradas</h5>
+                <button class="btn btn-success btn-sm" id="btn-nova-maquininha">
+                  <i class="fas fa-plus mr-1"></i>Nova Maquininha
+                </button>
+              </div>
+
+              <table id="tabela-maquininhas" class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Nome</th>
+                    <th>Serial (device)</th>
+                    <th>Loja</th>
+                    <th>Tipo Padrão</th>
+                    <th>Status</th>
+                    <th style="width:110px">Ações</th>
+                  </tr>
+                </thead>
+                <tbody id="tbody-maquininhas">
+                  <tr><td colspan="6" class="text-center text-muted">Carregando...</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div><!-- /.tab-content -->
+        </div><!-- /#conteudo-config -->
+
+      </div>
+    </section>
+  </div><!-- /.content-wrapper -->
+</div><!-- /.wrapper -->
+
+<!-- ── Modal Maquininha ─────────────────────────────────────────────────────── -->
+<div class="modal fade" id="modal-maquininha" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white">
+        <h5 class="modal-title" id="modal-maquininha-titulo">Maquininha</h5>
+        <button type="button" class="close text-white" data-dismiss="modal"><span>&times;</span></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="maq-id">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Nome <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="maq-nome" placeholder="Ex: Caixa 01">
+            </div>
+            <div class="form-group">
+              <label>Serial (device_serial_number) <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" id="maq-serial" placeholder="Ex: POS123456">
+              <small class="text-muted">Número serial exibido nas configurações da maquininha Stone.</small>
+            </div>
+            <div class="form-group">
+              <label>Descrição</label>
+              <input type="text" class="form-control" id="maq-descricao">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Loja <span class="text-danger">*</span></label>
+              <select class="form-control" id="maq-loja-id">
+                <option value="1">Loja Principal</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Tipo de Pagamento Padrão</label>
+              <select class="form-control" id="maq-tipo-padrao">
+                <option value="operador_escolhe">Operador escolhe na maquininha</option>
+                <option value="debit">Débito</option>
+                <option value="credit">Crédito</option>
+                <option value="pix">PIX</option>
+                <option value="voucher">Voucher</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Status</label>
+              <select class="form-control" id="maq-status">
+                <option value="ativa">Ativa</option>
+                <option value="inativa">Inativa</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btn-salvar-maquininha">
+          <i class="fas fa-save mr-1"></i>Salvar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="config.js"></script>
+</body>
+</html>
